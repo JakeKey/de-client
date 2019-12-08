@@ -7,14 +7,14 @@ import {
   Link
 } from "react-router-dom";
 
+const Dashboard = (props) => {
 
-
-export const Dashboard = () => {
   return (
     <div >
-
-    LANDING PAGE
-
+      Dashboard
+      
     </div>
   );
 };
+
+export default Dashboard;

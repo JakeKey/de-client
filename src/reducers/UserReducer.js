@@ -14,5 +14,7 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         token: action.payload
       };
+    default:
+      return state
   }
 }

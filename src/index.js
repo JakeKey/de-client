@@ -1,37 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { Normalize } from 'styled-normalize';
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
+  BrowserRouter as Router
 } from "react-router-dom";
+import { Provider } from 'react-redux'
+import { store } from './store/index'
 
-import { LandingPage } from "./LandingPage";
-import { ProtectedRoute } from "./app/ProtectedRoute";
-import { Dashboard } from "./app/Dashboard";
+import App from "./App";
 
-const GlobalStyle = createGlobalStyle`
-  @import url('https://fonts.googleapis.com/css?family=Sarabun|Telex&display=swap');
 
-  * {
-    font-family: ${props => props.theme.fontFamily};
-  }
-`
-
-function App() {
-  return (
+ReactDOM.render(
+  <Provider store={store}>
     <Router>
-      <ThemeProvider theme={{ fontFamily: 'Telex' }}>
-        <Normalize />
-        <Route exact path='/' component={LandingPage} />
-        <ProtectedRoute exact path='/app' component={Dashboard} />
-        <GlobalStyle />
-      </ThemeProvider>
+      <Normalize />
+      <App />
     </Router>
-  );
-};
-
-ReactDOM.render(<App />, document.getElementById('root'));
+  </Provider>, document.getElementById('root'));
