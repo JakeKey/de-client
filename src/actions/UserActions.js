@@ -1,24 +1,58 @@
+import { API_URL, AUTH_ROUTE, USER_ROUTE } from '../config';
 import {
-  USER_SAVE_TOKEN
-  
+  USER_LOGIN,
+  USER_REGISTER
 } from '../store/types';
+const axios = require('axios');
 
-
-export const loginSaveToken = (token) => (dispatch) => {
-  const storeToken = async () => {
-    console.log(">>> SAVING TOKEN: ", token);
+export const userLogin = (username, password) => (dispatch) => {
+  const saveToken = async (token) => {
     try {
-     // await AsyncStorage.setItem('authToken', token)
+      await localStorage.setItem('authToken', token);
     } catch (e) {
-      // saving error
-      console.warn(">>> ERROR SAVING TOKEN: ", e);
+      console.log('Error saving token: ', e);
     }
+    dispatch({
+      type: USER_LOGIN,
+      payload: token
+    });
   };
 
-  storeToken();
+  return (
+    axios.post(API_URL + AUTH_ROUTE, {
+      username, password
+    })
+      .then(({ data }) => {
+        saveToken(data);
+      })
+      .catch(err => {
+        console.log('Login Error: ', err)
+      })
+  );
+};
 
-  dispatch({
-    type: USER_SAVE_TOKEN,
-    payload: token
-  });
+export const userRegister = (username, password) => (dispatch) => {
+  const saveToken = async (token) => {
+    try {
+      await localStorage.setItem('authToken', token);
+    } catch (e) {
+      console.log('Error saving token: ', e);
+    }
+    dispatch({
+      type: USER_REGISTER,
+      payload: token
+    });
+  };
+
+  return (
+    axios.post(API_URL + USER_ROUTE, {
+      username, password
+    })
+      .then(({headers}) => {
+        saveToken(headers['x-auth-token']);
+      })
+      .catch(err => {
+        console.log('Register Error: ', err)
+      })
+  );
 };

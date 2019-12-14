@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import reduxLang from './middleware/lang';
-import { Button, LoginInput, StyledLink } from './components/inputs';
+import { Button, LoginInput } from './components/inputs';
+import { userLogin } from './actions';
 
-const axios = require('axios');
-
-function LoginForm({ t }) {
+function LoginForm({ t, userLogin }) {
   const [state, setState] = useState({ username: '', password: '' });
 
   const handleUsername = e => {
@@ -19,18 +18,8 @@ function LoginForm({ t }) {
   };
 
   const handleLogin = () => {
-    console.log('logg')
-    axios.post('http://localhost:3000/api/auth', {
-      username: state.username,
-      password: state.password
-    })
-    .then(res => {
-      console.log(res);
-    })
-    .catch(err => {
-      console.log(err);
-    });
-  }
+    userLogin(state.username, state.password);
+  };
 
   return (
     <>
@@ -67,4 +56,9 @@ const LoginFields = ({ t, handleUsername, handlePassword, username, password }) 
   </>
 );
 
-export default reduxLang('landingpage')(connect()(LoginForm));
+const mapStateToProps = ({ }) => {
+  //const { token } = user;
+  return {  };
+};
+
+export default reduxLang('landingpage')(connect(mapStateToProps, { userLogin })(LoginForm));

@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import reduxLang from './middleware/lang';
-import { Button, LoginInput, StyledLink } from './components/inputs';
+import { Button, LoginInput } from './components/inputs';
+import { userRegister } from './actions';
 
-const axios = require('axios');
-
-function RegisterForm({ t }) {
+function RegisterForm({ t, userRegister }) {
   const [state, setState] = useState({ username: '', password: '', passwordVerify: '' });
 
   const handleUsername = e => {
@@ -24,18 +23,10 @@ function RegisterForm({ t }) {
   };
 
   const handleRegister = () => {
-    if (state.password !== state.passwordVerify) return;
-    axios.post('http://localhost:3000/api/users', {
-      username: state.username,
-      password: state.password
-    })
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
+    // TODO add verification
+    if (state.password !== state.passwordVerify) return; 
+    userRegister(state.username, state.password);
+  };
 
   return (
     <>
@@ -83,4 +74,9 @@ function RegisterFields({ t, handleUsername, handlePassword, handlePasswordVerif
   );
 }
 
-export default reduxLang('landingpage')(connect()(RegisterForm));
+const mapStateToProps = ({ }) => {
+  //const { token } = user;
+  return {  };
+};
+
+export default reduxLang('landingpage')(connect(mapStateToProps, { userRegister })(RegisterForm));
