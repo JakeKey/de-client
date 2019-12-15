@@ -1,7 +1,8 @@
 import { API_URL, AUTH_ROUTE, USER_ROUTE } from '../config';
 import {
   USER_LOGIN,
-  USER_REGISTER
+  USER_REGISTER,
+  USER_LOGOUT
 } from '../store/types';
 const axios = require('axios');
 
@@ -34,6 +35,22 @@ export const userRegister = (username, password) => (dispatch) => (
       console.log('Register Error: ', err)
     })
 );
+
+export const userLogout = () => (dispatch) => {
+  const removeToken = async () => {
+    try {
+      await localStorage.removeItem('authToken');
+      dispatch({
+        type: USER_LOGOUT
+      });
+    } catch (e) {
+      console.log('Error removing token: ', e);
+    }
+  }
+  return (
+    removeToken()
+  )
+};
 
 const saveToken = async (token) => {
   try {

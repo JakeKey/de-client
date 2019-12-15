@@ -1,6 +1,7 @@
 import {
   USER_LOGIN,
-  USER_REGISTER
+  USER_REGISTER,
+  USER_LOGOUT
 } from '../store/types';
 
 const INITIAL_STATE = {
@@ -20,6 +21,8 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         userdata: action.payload
       };
+    case USER_LOGOUT:
+      return INITIAL_STATE;
     default:
       return state
   }

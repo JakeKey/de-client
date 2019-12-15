@@ -10,6 +10,8 @@ export default {
     landingpage_register_title: 'Create New Account',
     landingpage_register: 'Register',
     landingpage_register_back: '<- go back',
-
+  },
+  home: {
+    home_log_out: 'Log Out'
   }
 } 
