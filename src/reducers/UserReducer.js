@@ -4,7 +4,7 @@ import {
 } from '../store/types';
 
 const INITIAL_STATE = {
-  token: null
+  userdata: null
 };
 
 
@@ -13,12 +13,12 @@ export default (state = INITIAL_STATE, action) => {
     case USER_LOGIN:
       return {
         ...state,
-        token: action.payload
+        userdata: action.payload
       };
     case USER_REGISTER:
       return {
         ...state,
-        token: action.payload
+        userdata: action.payload
       };
     default:
       return state

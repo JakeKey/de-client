@@ -2,14 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Route, Redirect } from "react-router-dom";
 
-const ProtectedRoute = ({ component: Component, userdata, ...rest }) => (
+const LandingRoute = ({ component: Component, userdata, ...rest }) => (
   <Route
     {...rest}
     render={props => {
-      if (!!userdata && !!userdata.token) {
+      if (!userdata || !userdata.token) {
         return <Component {...props} />
       } else {
-        return <Redirect to={'/'} />
+        return <Redirect to={'/app'} />
       }
     }
     }
@@ -21,4 +21,4 @@ const mapStateToProps = ({ user }) => {
   return { userdata };
 };
 
-export default connect(mapStateToProps, {})(ProtectedRoute);
+export default connect(mapStateToProps, {})(LandingRoute);

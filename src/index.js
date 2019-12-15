@@ -4,16 +4,19 @@ import { Normalize } from 'styled-normalize';
 import {
   BrowserRouter as Router
 } from "react-router-dom";
-import { Provider } from 'react-redux'
-import { store } from './store/index'
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './store/index';
 
 import App from "./App";
 
 
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <Normalize />
-      <App />
-    </Router>
+    <PersistGate loading={null} persistor={persistor}>
+      <Router>
+        <Normalize />
+        <App />
+      </Router>
+    </PersistGate>
   </Provider>, document.getElementById('root'));

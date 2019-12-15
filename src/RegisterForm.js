@@ -4,7 +4,7 @@ import reduxLang from './middleware/lang';
 import { Button, LoginInput } from './components/inputs';
 import { userRegister } from './actions';
 
-function RegisterForm({ t, userRegister }) {
+function RegisterForm({ t, userRegister, userdata }) {
   const [state, setState] = useState({ username: '', password: '', passwordVerify: '' });
 
   const handleUsername = e => {
@@ -27,7 +27,7 @@ function RegisterForm({ t, userRegister }) {
     if (state.password !== state.passwordVerify) return; 
     userRegister(state.username, state.password);
   };
-
+  console.log('userdata', userdata)
   return (
     <>
       <RegisterFields
@@ -72,11 +72,11 @@ function RegisterFields({ t, handleUsername, handlePassword, handlePasswordVerif
       />
     </>
   );
-}
+};
 
-const mapStateToProps = ({ }) => {
-  //const { token } = user;
-  return {  };
+const mapStateToProps = ({ user }) => {
+  const { userdata } = user;
+  return { userdata };
 };
 
 export default reduxLang('landingpage')(connect(mapStateToProps, { userRegister })(RegisterForm));
