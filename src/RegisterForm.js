@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import reduxLang from './middleware/lang';
-import { Button, LoginInput } from './components/inputs';
+import { Button, LoginInput, StyledLink } from './components/inputs';
+import { LoginFormWrapper } from './components/containers';
 import { userRegister } from './actions';
 
 function RegisterForm({ t, userRegister, userdata }) {
@@ -22,14 +23,15 @@ function RegisterForm({ t, userRegister, userdata }) {
     setState({ ...state, passwordVerify: value })
   };
 
-  const handleRegister = () => {
+  const handleRegister = e => {
+    e.preventDefault();
     // TODO add verification
-    if (state.password !== state.passwordVerify) return; 
+    if (state.password !== state.passwordVerify) return;
     userRegister(state.username, state.password);
   };
   console.log('userdata', userdata)
   return (
-    <>
+    <LoginFormWrapper onSubmit={handleRegister} >
       <RegisterFields
         t={t}
         handleUsername={handleUsername}
@@ -39,10 +41,11 @@ function RegisterForm({ t, userRegister, userdata }) {
         password={state.password}
         passwordVerify={state.passwordVerify}
       />
-      <Button primary onClick={handleRegister} >
+      <Button primary type={'submit'} >
         {t('landingpage_register')}
       </Button>
-    </>
+      <StyledLink color={'#00798c'} bold to="/">{t('landingpage_register_back')}</StyledLink>
+    </LoginFormWrapper>
   );
 };
 

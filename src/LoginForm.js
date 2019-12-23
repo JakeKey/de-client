@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import reduxLang from './middleware/lang';
-import { Button, LoginInput } from './components/inputs';
+import { Button, LoginInput, StyledLink } from './components/inputs';
 import { userLogin } from './actions';
+import { LoginFormWrapper } from './components/containers';
+import { SimpleText } from './components/texts';
 
 function LoginForm({ t, userLogin }) {
   const [state, setState] = useState({ username: '', password: '' });
@@ -17,12 +19,13 @@ function LoginForm({ t, userLogin }) {
     setState({ ...state, password: value });
   };
 
-  const handleLogin = () => {
+  const handleLogin = e => {
+    e.preventDefault();
     userLogin(state.username, state.password);
   };
 
   return (
-    <>
+    <LoginFormWrapper>
       <LoginFields
         t={t}
         handleUsername={handleUsername}
@@ -30,10 +33,12 @@ function LoginForm({ t, userLogin }) {
         username={state.username}
         password={state.password}
       />
-      <Button primary onClick={handleLogin} >
+      <Button primary type={'submit'} onClick={handleLogin} >
         {t('landingpage_login_button')}
       </Button>
-    </>
+      <SimpleText>{t('landingpage_login_or')} </SimpleText>
+        <StyledLink color={'#00798c'} bold to="/register">{t('landingpage_register_button')}</StyledLink>
+    </LoginFormWrapper>
   );
 };
 

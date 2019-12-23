@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import reduxLang from '../middleware/lang';
 import { Button } from '../components/inputs';
+import { DashboardWrapper } from '../components/containers';
 import { userLogout } from '../actions';
+import NavMenu from './NavMenu';
 
 import {
   Route,
@@ -13,12 +15,12 @@ class Dashboard extends Component {
   
 
   render() {
-    const { t, userLogout } = this.props;
+    const { t } = this.props;
     return (
-      <div >
+      <DashboardWrapper >
+        <NavMenu />
         Dashboard <br />
-        <Button primary onClick={userLogout} >{t('home_log_out')}</Button>
-      </div>
+      </DashboardWrapper>
     )
   }
 };
@@ -28,4 +30,4 @@ const mapStateToProps = ({ }) => {
   return {};
 };
 
-export default reduxLang('home')(connect(mapStateToProps, { userLogout })(Dashboard));
+export default reduxLang('home')(connect(mapStateToProps, { })(Dashboard));

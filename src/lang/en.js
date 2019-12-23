@@ -12,6 +12,9 @@ export default {
     landingpage_register_back: '<- go back',
   },
   home: {
+    home_nav_products: 'Browse Products',
+    home_nav_meals: 'My Meals',
+    home_nav_diets: 'My Diets',
     home_log_out: 'Log Out'
   }
 } 
