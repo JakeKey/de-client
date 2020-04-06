@@ -1,0 +1,20 @@
+{
+  "landingpage": {
+    "login_title": "Login to Diet Editor",
+    "login_or": "or",
+    "login_button": "Login",
+    "register_button": "Create new account",
+    "username_input": "Username",
+    "password_input": "Password",
+    "password_verify_input": "Re-type Password",
+    "register_title": "Create New Account",
+    "register": "Register",
+    "register_back": "<- go back"
+  },
+  "dashboard": {
+    "nav_products": "Browse Products",
+    "nav_meals": "My Meals",
+    "nav_diets": "My Diets",
+    "log_out": "Log Out"
+  }
+}
