@@ -1,21 +1,62 @@
-import React from "react";
+import React, { useState, ChangeEvent } from "react";
 import { connect } from "react-redux";
 
+import { userLogin } from "store/actions";
 import usePrefix from "utils/usePrefix";
 
-import { LandingPageWrapper } from "components/containers";
-import { Title } from "components/texts";
+import Button from "components/Button";
+import LoginPageContainer from "components/LoginPageContainer";
+import StyledLink from "components/StyledLink";
+import TextInput from "components/TextInput";
+import Text from "components/Text";
 
-import LoginForm from "./LoginForm";
-
-const Login: React.FC = () => {
+const Login: React.FC = ({ userLogin }: any) => {
   const t = usePrefix("landingpage");
+
+  const [state, setState] = useState({ username: "", password: "" });
+
+  const handleUsername = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setState({ ...state, username: value });
+  };
+
+  const handlePassword = (e: ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setState({ ...state, password: value });
+  };
+
+  const handleLogin = (e: any) => {
+    e.preventDefault();
+    userLogin(state.username, state.password);
+  };
+
   return (
-    <LandingPageWrapper>
-      <Title>{t("login_title")}</Title>
-      <LoginForm />
-    </LandingPageWrapper>
+    <LoginPageContainer title={t("login_title")}>
+      <TextInput
+        type={"text"}
+        name={"username"}
+        placeholder={t("username_input")}
+        onChange={handleUsername}
+        value={state.username}
+      />
+      <TextInput
+        type={"password"}
+        name={"password"}
+        placeholder={t("password_input")}
+        onChange={handlePassword}
+        value={state.password}
+      />
+      <Button type={"submit"} onClick={handleLogin}>
+        {t("login_button")}
+      </Button>
+      <Text>{t("login_or")}</Text>
+      <StyledLink to="/register">{t("register_button")}</StyledLink>
+    </LoginPageContainer>
   );
 };
 
-export default connect()(Login);
+const mapStateToProps = () => null;
+//const { token } = user;
+//return {};
+
+export default connect(mapStateToProps, { userLogin })(Login);

@@ -1,27 +1,25 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button } from "../inputs";
-import { NavMenuWrapper } from "../containers";
+
 import { userLogout } from "store/actions";
+import usePrefix from "utils/usePrefix";
 
-const NavMenu = ({ t, userLogout }: any) => (
-  <NavMenuWrapper>
-    <Button primary={true} onClick={() => null}>
-      {t("home_nav_products")}
-    </Button>
-    <Button primary={true} onClick={() => null}>
-      {t("home_nav_meals")}
-    </Button>
-    <Button primary={true} onClick={() => null}>
-      {t("home_nav_diets")}
-    </Button>
+import Button from "components/Button";
 
-    <Button primary={true} onClick={userLogout}>
-      {t("home_log_out")}
-    </Button>
-  </NavMenuWrapper>
-);
+import { Wrapper } from "./styles";
 
+const NavMenu = ({ userLogout }: any) => {
+  const t = usePrefix("dashboard");
+  return (
+    <Wrapper flexDirection="column">
+      <Button onClick={() => null}>{t("nav_products")}</Button>
+      <Button onClick={() => null}>{t("nav_meals")}</Button>
+      <Button onClick={() => null}>{t("nav_diets")}</Button>
+
+      <Button onClick={userLogout}>{t("log_out")}</Button>
+    </Wrapper>
+  );
+};
 const mapStateToProps = () => null;
 //const { token } = user;
 // return {}

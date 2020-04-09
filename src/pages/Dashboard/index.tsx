@@ -1,17 +1,20 @@
 import React from "react";
 import { connect } from "react-redux";
-import { DashboardWrapper } from "components/containers";
-import NavMenu from "components/NavMenu";
+
 import usePrefix from "utils/usePrefix";
 
-const Dashboard = ({ t }: any) => {
-  t = usePrefix("dashboard");
+import NavMenu from "components/NavMenu";
+
+import { Wrapper } from "./styles";
+
+const Dashboard = () => {
+  const t = usePrefix("dashboard");
   return (
-    <DashboardWrapper>
+    <Wrapper alignContent="center">
       <NavMenu />
       {t("tasd")}
       Dashboard <br />
-    </DashboardWrapper>
+    </Wrapper>
   );
 };
 export default connect()(Dashboard);

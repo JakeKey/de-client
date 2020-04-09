@@ -9,6 +9,10 @@ export const GlobalStyle = createGlobalStyle`
     align-content: center;
   }
 
+  body {
+    background-color: ${colors.gunmetal}
+  }
+
   ::placeholder {
     color: ${colors.gunmetal};
     opacity: 0.7; 
