@@ -1,5 +1,5 @@
-import React, { useState, ChangeEvent } from "react";
-import { connect } from "react-redux";
+import React, { useState, ChangeEvent, FC } from "react";
+import { connect, ConnectedProps } from "react-redux";
 
 import { userLogin } from "store/actions";
 import usePrefix from "utils/usePrefix";
@@ -10,7 +10,11 @@ import StyledLink from "components/StyledLink";
 import TextInput from "components/TextInput";
 import Text from "components/Text";
 
-const Login: React.FC = ({ userLogin }: any) => {
+const connector = connect(null, { userLogin });
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const Login: FC<PropsFromRedux> = ({ userLogin }) => {
   const t = usePrefix("landingpage");
 
   const [state, setState] = useState({ username: "", password: "" });
@@ -55,8 +59,4 @@ const Login: React.FC = ({ userLogin }: any) => {
   );
 };
 
-const mapStateToProps = () => null;
-//const { token } = user;
-//return {};
-
-export default connect(mapStateToProps, { userLogin })(Login);
+export default connector(Login);

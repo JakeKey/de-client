@@ -1,15 +1,25 @@
-import React, { useState, ChangeEvent } from "react";
-import { connect } from "react-redux";
+import React, { useState, ChangeEvent, FC } from "react";
+import { connect, ConnectedProps } from "react-redux";
 
 import usePrefix from "utils/usePrefix";
 import { userRegister } from "store/actions";
+import { RootState } from "store/reducers";
 
 import Button from "components/Button";
 import LoginPageContainer from "components/LoginPageContainer";
 import StyledLink from "components/StyledLink";
 import TextInput from "components/TextInput";
 
-function Register({ userRegister, userdata }: any) {
+const mapStateToProps = ({ user }: RootState) => {
+  const { userdata } = user;
+  return { userdata };
+};
+
+const connector = connect(mapStateToProps, { userRegister });
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
+const Register: FC<PropsFromRedux> = ({ userRegister, userdata }) => {
   const t = usePrefix("landingpage");
 
   const [state, setState] = useState({
@@ -69,11 +79,6 @@ function Register({ userRegister, userdata }: any) {
       <StyledLink to="/">{t("register_back")}</StyledLink>
     </LoginPageContainer>
   );
-}
-
-const mapStateToProps = ({ user }: any) => {
-  const { userdata } = user;
-  return { userdata };
 };
 
-export default connect(mapStateToProps, { userRegister })(Register);
+export default connector(Register);

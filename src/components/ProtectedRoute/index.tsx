@@ -1,4 +1,4 @@
-import React, { ComponentType } from "react";
+import React, { ComponentType, FC } from "react";
 import { Route, Redirect, RouteProps } from "react-router-dom";
 
 import { UserDataType } from "store/types";
@@ -8,7 +8,7 @@ interface Props {
   userdata: UserDataType | null;
 }
 
-const ProtectedRoute: React.FC<Props & RouteProps> = ({
+const ProtectedRoute: FC<Props & RouteProps> = ({
   Component,
   userdata,
   ...rest

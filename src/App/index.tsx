@@ -1,4 +1,4 @@
-import React, { Suspense } from "react";
+import React, { Suspense, FC } from "react";
 import { connect, ConnectedProps } from "react-redux";
 import { Switch, Redirect, Route } from "react-router-dom";
 
@@ -20,7 +20,7 @@ const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const App: React.FC<PropsFromRedux> = ({ userdata }) => (
+const App: FC<PropsFromRedux> = ({ userdata }) => (
   <Suspense fallback={<div>Loading translations... </div>}>
     <Switch>
       <Route exact path="/" component={LandingPage} />

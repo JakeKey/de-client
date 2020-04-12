@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, FC } from "react";
 import { Redirect } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
 import { RootState } from "store/reducers";
@@ -19,7 +19,7 @@ interface Props {
   children?: ReactNode;
 }
 
-const LoginPageContainer: React.FC<Props & PropsFromRedux> = ({
+const LoginPageContainer: FC<Props & PropsFromRedux> = ({
   title,
   children,
   userdata
