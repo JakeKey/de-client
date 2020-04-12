@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, FC } from "react";
+import React, { useState, ChangeEvent, FC, MouseEvent } from "react";
 import { connect, ConnectedProps } from "react-redux";
 
 import { userLogin } from "store/actions";
@@ -29,7 +29,7 @@ const Login: FC<PropsFromRedux> = ({ userLogin }) => {
     setState({ ...state, password: value });
   };
 
-  const handleLogin = (e: any) => {
+  const handleLogin = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     userLogin(state.username, state.password);
   };

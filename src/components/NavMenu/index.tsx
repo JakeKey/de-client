@@ -17,7 +17,7 @@ const NavMenu: FC<PropsFromRedux> = ({ userLogout }) => {
   return (
     <Wrapper flexDirection="column">
       <Button onClick={() => null}>{t("nav_products")}</Button>
-      <Button onClick={() => null}>{t("nav_meals")}</Button>
+      <Button link="/meals">{t("nav_meals")}</Button>
       <Button onClick={() => null}>{t("nav_diets")}</Button>
       <Button onClick={userLogout}>{t("log_out")}</Button>
     </Wrapper>

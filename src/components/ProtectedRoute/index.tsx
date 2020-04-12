@@ -1,14 +1,23 @@
 import React, { ComponentType, FC } from "react";
 import { Route, Redirect, RouteProps } from "react-router-dom";
+import { connect, ConnectedProps } from "react-redux";
 
-import { UserDataType } from "store/types";
+import { RootState } from "store/reducers";
+
+const mapStateToProps = ({ user }: RootState) => {
+  const { userdata } = user;
+  return { userdata };
+};
+
+const connector = connect(mapStateToProps);
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
 
 interface Props {
   Component: ComponentType;
-  userdata: UserDataType | null;
 }
 
-const ProtectedRoute: FC<Props & RouteProps> = ({
+const ProtectedRoute: FC<Props & RouteProps & PropsFromRedux> = ({
   Component,
   userdata,
   ...rest
@@ -21,4 +30,4 @@ const ProtectedRoute: FC<Props & RouteProps> = ({
     <Redirect to={"/"} />
   );
 
-export default ProtectedRoute;
+export default connector(ProtectedRoute);
