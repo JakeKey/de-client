@@ -13,11 +13,11 @@ const connector = connect(null, { userLogout });
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const NavMenu: FC<PropsFromRedux> = ({ userLogout }) => {
-  const t = usePrefix("dashboard");
+  const t = usePrefix("navigation");
   return (
     <Wrapper flexDirection="column">
-      <Button onClick={() => null}>{t("nav_products")}</Button>
-      <Button link="/meals">{t("nav_meals")}</Button>
+      <Button link="/app">{t("nav_home")}</Button>
+      <Button link="/app/meals">{t("nav_meals")}</Button>
       <Button onClick={() => null}>{t("nav_diets")}</Button>
       <Button onClick={userLogout}>{t("log_out")}</Button>
     </Wrapper>

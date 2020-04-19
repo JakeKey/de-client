@@ -11,10 +11,22 @@
     "register": "Register",
     "register_back": "<- go back"
   },
-  "dashboard": {
-    "nav_products": "Browse Products",
+  "navigation": {
+    "nav_home": "Home",
     "nav_meals": "My Meals",
     "nav_diets": "My Diets",
     "log_out": "Log Out"
+  },
+  "meals": {
+    "select_prod_category": "Select product category...",
+    "meat": "meat",
+    "dairy": "dairy",
+    "preserved food": "preserved food",
+    "fish & seafood": "fish & seafood",
+    "fats & oils": "fats & oils",
+    "dried fruit": "dried fruit",
+    "cereal products": "cereal products",
+    "fruits": "fruits",
+    "vegetables": "vegetables"
   }
 }

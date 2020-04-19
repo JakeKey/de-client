@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-import { colors } from "styles/colors";
+import colors from "styles/colors";
 
 const TextInput = styled.input`
   background-color: ${colors.orange};

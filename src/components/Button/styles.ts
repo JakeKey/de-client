@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 import { Link } from "react-router-dom";
 
-import { colors } from "styles/colors";
+import colors from "styles/colors";
 
 const buttonStyles = css`
   background: ${colors.gunmetal};
@@ -12,6 +12,10 @@ const buttonStyles = css`
   border: 2px solid ${colors.paleVioletRed};
   border-radius: 20px;
   cursor: pointer;
+
+  &:hover {
+    opacity: 0.8;
+  }
 `;
 
 export const StyledButton = styled.button`

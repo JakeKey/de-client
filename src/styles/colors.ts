@@ -1,4 +1,4 @@
-export const colors = {
+const colors = {
   gunmetal: "#31393c",
   crimson: "#ec0b43",
   shamrock: "#7ae7c7",
@@ -11,3 +11,5 @@ export const colors = {
   orange: "#dab785",
   black: "#020402"
 };
+
+export default colors;

@@ -13,7 +13,7 @@ const App: FC = () => (
     <Switch>
       <Route exact path="/" component={LandingPage} />
       <Route path="/register" component={RegisterPage} />
-      <ProtectedRoute path="/app" Component={Dashboard} />
+      <ProtectedRoute path="/app" component={Dashboard} />
       <Redirect to="/" />
     </Switch>
     <GlobalStyle />

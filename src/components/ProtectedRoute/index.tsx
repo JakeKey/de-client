@@ -1,4 +1,4 @@
-import React, { ComponentType, FC } from "react";
+import React, { FC } from "react";
 import { Route, Redirect, RouteProps } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
 
@@ -13,21 +13,10 @@ const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-interface Props {
-  Component: ComponentType;
-}
-
-const ProtectedRoute: FC<Props & RouteProps & PropsFromRedux> = ({
-  Component,
+const ProtectedRoute: FC<RouteProps & PropsFromRedux> = ({
   userdata,
   ...rest
 }) =>
-  !!userdata && !!userdata.token ? (
-    <Route {...rest}>
-      <Component />
-    </Route>
-  ) : (
-    <Redirect to={"/"} />
-  );
+  !!userdata && !!userdata.token ? <Route {...rest} /> : <Redirect to={"/"} />;
 
 export default connector(ProtectedRoute);
