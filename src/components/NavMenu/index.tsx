@@ -16,9 +16,11 @@ const NavMenu: FC<PropsFromRedux> = ({ userLogout }) => {
   const t = usePrefix("navigation");
   return (
     <Wrapper flexDirection="column">
-      <Button link="/app">{t("nav_home")}</Button>
-      <Button link="/app/meals">{t("nav_meals")}</Button>
-      <Button onClick={() => null}>{t("nav_diets")}</Button>
+      <Button exact navLink="/app">
+        {t("nav_home")}
+      </Button>
+      <Button navLink="/app/meals">{t("nav_meals")}</Button>
+      <Button navLink="/app/diets">{t("nav_diets")}</Button>
       <Button onClick={userLogout}>{t("log_out")}</Button>
     </Wrapper>
   );

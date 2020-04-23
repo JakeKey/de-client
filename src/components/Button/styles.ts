@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 import colors from "styles/colors";
 
@@ -26,4 +26,14 @@ export const StyledButtonLink = styled(Link)`
   ${buttonStyles};
   text-decoration: none;
   text-align: center;
+`;
+
+export const NavItem = styled(NavLink)`
+  ${buttonStyles};
+  text-decoration: none;
+  text-align: center;
+
+  &.active {
+    opacity: 0.8;
+  }
 `;
