@@ -2,6 +2,10 @@ import styled, { CSSProperties } from "styled-components/macro";
 
 import colors from "styles/colors";
 
+export const ProductDetails = styled.div`
+  justify-self: center;
+`;
+
 export const customSelectStyle = {
   option: (provided: CSSProperties) => ({
     ...provided,
@@ -35,7 +39,3 @@ export const customSelectStyle = {
   indicatorSeparator: () => ({ display: "none" }),
   dropdownIndicator: () => ({ color: colors.gunmetal })
 };
-
-export const Wrapper = styled.div`
-  width: 100%;
-`;

@@ -15,8 +15,9 @@ import { PRODUCTS_ROUTE, PRODUCTS_CATEGORIES_ROUTE } from "config";
 import ElementsList from "components/ElementsList";
 import TextInput from "components/TextInput";
 import Button from "components/Button";
+import Layout from "components/Layout";
 
-import { customSelectStyle } from "./styles";
+import { ProductDetails, customSelectStyle } from "./styles";
 
 interface CategoryOption {
   value: ProductsCategoriesType;
@@ -106,86 +107,92 @@ const Meals: FC = () => {
   }, [productCategory]);
 
   return (
-    <div>
-      <ReactSelect
-        onChange={(value: ValueType<CategoryOption>) => {
-          setProductCategory(value);
-          setProduct(null);
-        }}
-        options={options.categories}
-        value={productCategory}
-        isSearchable={false}
-        placeholder={t("select_prod_category")}
-        styles={customSelectStyle}
-      />
-      <ReactSelect
-        onChange={(value: ValueType<ProductOption>) => setProduct(value)}
-        options={options.products}
-        value={product}
-        isSearchable={false}
-        placeholder={t("select_product")}
-        styles={customSelectStyle}
-      />
-      {product && "value" in product && (
-        <>
-          <ElementsList
-            title={t("nutrients_per_100g")}
-            elements={[
-              {
-                label: `${t("proteins")}: ${product.value.proteins}g`,
-                id: t("proteins")
-              },
-              {
-                label: `${t("carbohydrates")}: ${product.value.carbohydrates}g`,
-                id: t("carbohydrates")
-              },
-              {
-                label: `${t("fat")}: ${product.value.fat}g`,
-                id: t("fat")
-              },
-              {
-                label: `${t("saturated_fat")}: ${product.value.saturatedFat}g`,
-                id: t("saturated_fat")
-              },
-              {
-                label: `${t("omega3")}: ${product.value.omega3}g`,
-                id: t("omega3")
-              },
-              {
-                label: `${t("omega6")}: ${product.value.omega6}g`,
-                id: t("omega6")
-              },
-              {
-                label: `${t("salt")}: ${product.value.salt}g`,
-                id: t("salt")
-              },
-              {
-                label: `${t("sugar")}: ${product.value.sugar}g`,
-                id: t("sugar")
-              },
-              {
-                label: `${t("energy")}: ${product.value.energy}g`,
-                id: t("energy")
-              }
-            ]}
-          />
-          <TextInput
-            label={t("quantity_g")}
-            step={0.1}
-            type="number"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              if (!e.target.value) return;
-              setProductQuantity(parseFloat(e.target.value));
-            }}
-            value={productQuantity}
-            max={1000}
-            min={0}
-            size={6}
-          />
-          <Button color="transparent">{t("add_product")}</Button>
-        </>
-      )}
-    </div>
+    <Layout title="Meals">
+      <ProductDetails>
+        <ReactSelect
+          onChange={(value: ValueType<CategoryOption>) => {
+            setProductCategory(value);
+            setProduct(null);
+          }}
+          options={options.categories}
+          value={productCategory}
+          isSearchable={false}
+          placeholder={t("select_prod_category")}
+          styles={customSelectStyle}
+        />
+        <ReactSelect
+          onChange={(value: ValueType<ProductOption>) => setProduct(value)}
+          options={options.products}
+          value={product}
+          isSearchable={false}
+          placeholder={t("select_product")}
+          styles={customSelectStyle}
+        />
+        {product && "value" in product && (
+          <>
+            <ElementsList
+              title={t("nutrients_per_100g")}
+              elements={[
+                {
+                  label: `${t("proteins")}: ${product.value.proteins}g`,
+                  id: t("proteins")
+                },
+                {
+                  label: `${t("carbohydrates")}: ${
+                    product.value.carbohydrates
+                  }g`,
+                  id: t("carbohydrates")
+                },
+                {
+                  label: `${t("fat")}: ${product.value.fat}g`,
+                  id: t("fat")
+                },
+                {
+                  label: `${t("saturated_fat")}: ${
+                    product.value.saturatedFat
+                  }g`,
+                  id: t("saturated_fat")
+                },
+                {
+                  label: `${t("omega3")}: ${product.value.omega3}g`,
+                  id: t("omega3")
+                },
+                {
+                  label: `${t("omega6")}: ${product.value.omega6}g`,
+                  id: t("omega6")
+                },
+                {
+                  label: `${t("salt")}: ${product.value.salt}g`,
+                  id: t("salt")
+                },
+                {
+                  label: `${t("sugar")}: ${product.value.sugar}g`,
+                  id: t("sugar")
+                },
+                {
+                  label: `${t("energy")}: ${product.value.energy}g`,
+                  id: t("energy")
+                }
+              ]}
+            />
+            <TextInput
+              label={t("quantity_g")}
+              step={0.1}
+              type="number"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                if (!e.target.value) return;
+                setProductQuantity(parseFloat(e.target.value));
+              }}
+              value={productQuantity}
+              max={1000}
+              min={0}
+              size={6}
+            />
+            <Button color="transparent">{t("add_product")}</Button>
+          </>
+        )}
+      </ProductDetails>
+    </Layout>
   );
 };
 

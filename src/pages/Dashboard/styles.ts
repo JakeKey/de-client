@@ -4,10 +4,12 @@ import colors from "styles/colors";
 
 import FlexDiv from "components/FlexDiv";
 
+const LAYOUT_HEIGHT = "90vh";
+
 export const Wrapper = styled(FlexDiv)`
-  height: 80vh;
+  height: ${LAYOUT_HEIGHT};
   background: ${colors.shamrock};
-  margin: 5vh 5vw;
-  padding: 5vh 5vw;
+  margin: calc((100vh - ${LAYOUT_HEIGHT}) / 2) 5vw;
+  padding: 0 5vw;
   border-radius: 20px;
 `;
