@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 import colors from "styles/colors";
 
@@ -20,7 +20,7 @@ export const LoginForm = styled.form`
   background-color: ${colors.magicMint};
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
   padding: 5vh 5vw;
   border: 2px solid ${colors.paleVioletRed};
   border-radius: 20px;

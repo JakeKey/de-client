@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from "styled-components/macro";
 import colors from "./colors";
 
 export const GlobalStyle = createGlobalStyle`
@@ -6,7 +6,6 @@ export const GlobalStyle = createGlobalStyle`
 
   * {
     font-family: Sarabun;
-    align-content: center;
   }
 
   body {
@@ -15,6 +14,5 @@ export const GlobalStyle = createGlobalStyle`
 
   ::placeholder {
     color: ${colors.gunmetal};
-    opacity: 0.7; 
   }
 `;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import { Link, LinkProps } from "react-router-dom";
 
 import colors from "styles/colors";

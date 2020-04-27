@@ -15,7 +15,7 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 const NavMenu: FC<PropsFromRedux> = ({ userLogout }) => {
   const t = usePrefix("navigation");
   return (
-    <Wrapper flexDirection="column">
+    <Wrapper flexDirection="column" alignItems="center">
       <Button exact navLink="/app">
         {t("nav_home")}
       </Button>

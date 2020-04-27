@@ -1,21 +1,27 @@
 import React, { FC } from "react";
-import { StyledButtonLink, StyledButton, NavItem } from "./styles";
+
+import { ButtonColors, StyledButton, NavItem } from "./styles";
 
 interface Props {
-  link?: string;
   navLink?: string;
   exact?: boolean;
   type?: "submit";
+  color?: ButtonColors;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const Button: FC<Props> = ({ link, navLink, exact, onClick, type, ...props }) =>
-  link ? (
-    <StyledButtonLink to={link} {...props} />
-  ) : navLink ? (
-    <NavItem to={navLink} exact={exact} {...props} />
+const Button: FC<Props> = ({
+  navLink,
+  exact,
+  onClick,
+  type,
+  color = "primary",
+  ...props
+}) =>
+  navLink ? (
+    <NavItem to={navLink} exact={exact} color={color} {...props} />
   ) : (
-    <StyledButton onClick={onClick} type={type} {...props} />
+    <StyledButton onClick={onClick} type={type} color={color} {...props} />
   );
 
 export default Button;

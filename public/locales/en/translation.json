@@ -19,6 +19,7 @@
   },
   "meals": {
     "select_prod_category": "Select product category...",
+    "select_product": "Select product...",
     "meat": "meat",
     "dairy": "dairy",
     "preserved food": "preserved food",
@@ -27,6 +28,18 @@
     "dried fruit": "dried fruit",
     "cereal products": "cereal products",
     "fruits": "fruits",
-    "vegetables": "vegetables"
+    "vegetables": "vegetables",
+    "nutrients_per_100g": "Nutrients per 100g:",
+    "proteins": "proteins",
+    "carbohydrates": "carbohydrates",
+    "fat": "fat",
+    "saturated_fat": "saturated fat",
+    "omega3": "omega 3",
+    "omega6": "omega 6",
+    "salt": "salt",
+    "sugar": "sugar",
+    "energy": "energy",
+    "quantity_g": "Quantity [g]:",
+    "add_product": "Add product +"
   }
 }
