@@ -2,13 +2,13 @@ import styled from "styled-components/macro";
 
 import colors from "styles/colors";
 
-export const Wrapper = styled.div`
-  margin: 12px 0;
+export const Wrapper = styled.div<{ margin: string }>`
+  margin: ${({ margin }) => margin};
 `;
 
 export const StyledInput = styled.input`
   background-color: ${colors.orange};
-  color: ${colors.gunmetal};
+  color: ${colors.dark_gray};
   text-align: center;
   font-size: 15px;
   padding: 5px 15px;
@@ -17,7 +17,7 @@ export const StyledInput = styled.input`
 
 export const Label = styled.label`
   font-weight: bold;
-  color: ${colors.gray};
+  color: ${colors.dark_gray};
   display: block;
   font-size: 11px;
   margin-bottom: 4px;

@@ -8,7 +8,7 @@ export const STATUS_CODE_NOT_FOUND = 404;
 
 interface Options {
   method: "GET" | "POST" | "PUT" | "DELETE";
-  body?: Body;
+  data?: object;
   timeout?: number;
 }
 
@@ -22,7 +22,7 @@ const api = async (path: string, options: Options) => {
     ...options
   })
     .then(response => response)
-    .catch(err => console.log(err));
+    .catch(err => err);
   return result;
 };
 /*

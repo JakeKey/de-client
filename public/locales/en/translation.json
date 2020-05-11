@@ -18,10 +18,19 @@
     "log_out": "Log Out"
   },
   "meals": {
+    "meals": "meals",
+    "meal_name": "Meal name:",
+    "select_meal_category": "Select meal category...",
     "select_prod_category": "Select product category...",
     "select_product": "Select product...",
     "meat": "meat",
     "dairy": "dairy",
+    "I breakfast": "I breakfast",
+    "II breakfast": "II breakfast",
+    "lunch": "Lunch",
+    "snack": "Snack",
+    "I dinner": "I dinner",
+    "II dinner": "II dinner",
     "preserved food": "preserved food",
     "fish & seafood": "fish & seafood",
     "fats & oils": "fats & oils",
@@ -33,13 +42,17 @@
     "proteins": "proteins",
     "carbohydrates": "carbohydrates",
     "fat": "fat",
-    "saturated_fat": "saturated fat",
+    "saturatedFat": "saturated fat",
     "omega3": "omega 3",
     "omega6": "omega 6",
     "salt": "salt",
     "sugar": "sugar",
     "energy": "energy",
     "quantity_g": "Quantity [g]:",
-    "add_product": "Add product +"
+    "add_product": "Add product +",
+    "current_products": "Current products:",
+    "add_products": "Add products",
+    "current_nutrients": "Current nutrients:",
+    "add_meal": "Add meal"
   }
 }

@@ -12,7 +12,7 @@ export const Wrapper = styled(FlexDiv)`
 `;
 
 export const Title = styled.h1`
-  color: ${colors.darkBlue};
+  color: ${colors.dark_blue};
   text-align: center;
 `;
 

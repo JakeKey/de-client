@@ -9,12 +9,28 @@ export type ProductsCategoriesType =
   | "fruits"
   | "vegetables";
 
+export type MealCategoriesType =
+  | "I breakfast"
+  | "II breakfast"
+  | "lunch"
+  | "snack"
+  | "I dinner"
+  | "II dinner";
+
 export type ProductsCategoriesResponse = ProductsCategoriesType[];
 
-export interface ProductDetailsType {
-  _id: string;
-  name: string;
-  category: ProductsCategoriesType;
+export type NutrientsType =
+  | "proteins"
+  | "carbohydrates"
+  | "fat"
+  | "saturatedFat"
+  | "omega3"
+  | "omega6"
+  | "salt"
+  | "sugar"
+  | "energy";
+
+export interface ProductNutrientsType {
   proteins: number;
   carbohydrates: number;
   fat: number;
@@ -26,4 +42,16 @@ export interface ProductDetailsType {
   energy: number;
 }
 
+export interface ProductDetailsType {
+  _id: string;
+  name: string;
+  category: ProductsCategoriesType;
+  nutrients: ProductNutrientsType;
+}
+
 export type ProductDetailsResponse = ProductDetailsType[];
+
+export interface MealProductsType {
+  value: ProductDetailsType;
+  quantity: number;
+}

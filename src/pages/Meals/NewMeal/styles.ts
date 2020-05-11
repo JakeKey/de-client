@@ -1,7 +1,12 @@
-import styled, { CSSProperties } from "styled-components/macro";
+import { CSSProperties } from "styled-components/macro";
+
 import colors from "styles/colors";
 
-export const customSelectStyle = {
+interface Arguments {
+  margin?: string;
+}
+
+export const customSelectStyle = (styles?: Arguments) => ({
   option: (provided: CSSProperties) => ({
     ...provided,
     cursor: "pointer",
@@ -14,7 +19,8 @@ export const customSelectStyle = {
   }),
   container: (provided: CSSProperties) => ({
     ...provided,
-    width: "250px"
+    width: "250px",
+    margin: styles && styles.margin
   }),
   control: (provided: CSSProperties) => ({
     ...provided,
@@ -33,8 +39,4 @@ export const customSelectStyle = {
   }),
   indicatorSeparator: () => ({ display: "none" }),
   dropdownIndicator: () => ({ color: colors.dark_gray })
-};
-
-export const Wrapper = styled.div`
-  width: 300px;
-`;
+});

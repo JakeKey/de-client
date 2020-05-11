@@ -1,6 +1,7 @@
 import React, { FC } from "react";
 
-import { List, Element } from "./styles";
+import { ListContainer, Element } from "./styles";
+import Icon, { IconName } from "components/Icons";
 
 interface ElementType {
   label: string;
@@ -10,13 +11,15 @@ interface ElementType {
 interface Props {
   title: string;
   elements: ElementType[];
+  icon?: IconName;
+  iconColor?: string;
   onClick?: (id: number | string) => void;
 }
 
-const ElementsList: FC<Props> = ({ title, elements, onClick }) => (
+const List: FC<Props> = ({ title, elements, icon, iconColor, onClick }) => (
   <>
     {title}
-    <List>
+    <ListContainer>
       {!!elements.length &&
         elements.map(el => (
           <Element
@@ -24,10 +27,11 @@ const ElementsList: FC<Props> = ({ title, elements, onClick }) => (
             onClick={onClick ? () => onClick(el.id) : undefined}
           >
             {el.label}
+            {icon && <Icon type={icon} color={iconColor} />}
           </Element>
         ))}
-    </List>
+    </ListContainer>
   </>
 );
 
-export default ElementsList;
+export default List;

@@ -9,10 +9,10 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    background-color: ${colors.gunmetal}
+    background-color: ${colors.dark_gray}
   }
 
   ::placeholder {
-    color: ${colors.gunmetal};
+    color: ${colors.dark_gray};
   }
 `;
