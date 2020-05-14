@@ -14,7 +14,8 @@ import {
   ProductDetailsType,
   MealProductsType,
   MealCategoriesType,
-  NutrientsType
+  NutrientsType,
+  MealsResponse
 } from "utils/api/types";
 import { mealCategories } from "utils/constants";
 import { getProductsNutrients } from "utils/misc";
@@ -26,12 +27,17 @@ import Button from "components/Button";
 import GridItem from "components/GridItem";
 import FlexDiv from "components/FlexDiv";
 
-import { customSelectStyle } from "./styles";
+import { customSelectStyle, Footer } from "./styles";
 
 const quantitySchema = yup
   .number()
   .min(0.1)
   .max(1000);
+
+interface Props {
+  anyMeals: boolean;
+  closeNewMealView: () => void;
+}
 
 interface CategoryOption {
   value: ProductsCategoriesType;
@@ -54,7 +60,7 @@ interface OptionsTypes {
   mealCategories: MealCategoryOption[];
 }
 
-const NewMeal: FC = () => {
+const NewMeal: FC<Props> = ({ closeNewMealView, anyMeals }) => {
   const t = usePrefix("meals");
 
   const [options, setOptions] = useState<OptionsTypes>({
@@ -162,7 +168,7 @@ const NewMeal: FC = () => {
     setMealProducts(mealProducts.filter(prod => prod.value._id !== id));
 
   const handleMealAdd = async () => {
-    const result: AxiosResponse | void = await api(MEALS_ROUTE, {
+    const result: AxiosResponse<MealsResponse> | void = await api(MEALS_ROUTE, {
       method: "POST",
       data: {
         name: mealName,
@@ -173,7 +179,7 @@ const NewMeal: FC = () => {
         }))
       }
     });
-    console.log("result", result);
+    if (result && result.data) console.log("result", result.data);
   };
 
   useEffect(() => {
@@ -182,7 +188,6 @@ const NewMeal: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mealProducts]);
 
-  console.log("mname", mealName);
   return (
     <>
       <GridItem gridRowEnd="span 2">
@@ -302,14 +307,19 @@ const NewMeal: FC = () => {
           t("add_products")
         )}
       </div>
-      <GridItem gridColumnEnd="span 2" justifySelf="center">
+      <Footer justifySelf="center" gridArea="footer">
+        {anyMeals && (
+          <Button color="transparent" onClick={closeNewMealView}>
+            {t("go_back")}
+          </Button>
+        )}
         <Button
           onClick={handleMealAdd}
           disabled={!mealProducts.length || !mealName || !mealCategory}
         >
           {t("add_meal")}
         </Button>
-      </GridItem>
+      </Footer>
     </>
   );
 };

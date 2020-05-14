@@ -1,6 +1,13 @@
-import { CSSProperties } from "styled-components/macro";
+import styled, { CSSProperties } from "styled-components/macro";
 
 import colors from "styles/colors";
+import GridItem from "components/GridItem";
+
+export const Footer = styled(GridItem)`
+  & > button {
+    margin: 0 50px;
+  }
+`;
 
 interface Arguments {
   margin?: string;

@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { Wrapper, Title } from "./styles";
+import { Wrapper, Header } from "./styles";
 
 interface Props {
   title: string;
@@ -8,9 +8,9 @@ interface Props {
 
 const Layout: FC<Props> = ({ title, children }) => (
   <Wrapper>
-    <Title>
+    <Header>
       <h1> {title}</h1>
-    </Title>
+    </Header>
     {children}
   </Wrapper>
 );

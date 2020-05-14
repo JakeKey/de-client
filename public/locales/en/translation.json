@@ -1,4 +1,7 @@
 {
+  "general": {
+    "loading": "Loading..."
+  },
   "landingpage": {
     "login_title": "Login to Diet Editor",
     "login_or": "or",
@@ -18,7 +21,7 @@
     "log_out": "Log Out"
   },
   "meals": {
-    "meals": "meals",
+    "my_meals": "My meals",
     "meal_name": "Meal name:",
     "select_meal_category": "Select meal category...",
     "select_prod_category": "Select product category...",
@@ -53,6 +56,9 @@
     "current_products": "Current products:",
     "add_products": "Add products",
     "current_nutrients": "Current nutrients:",
-    "add_meal": "Add meal"
+    "add_meal": "Add meal",
+    "category_meals": "{{category}} meals:",
+    "create_new_meal": "Create new meal",
+    "go_back": "<- go back"
   }
 }

@@ -55,3 +55,21 @@ export interface MealProductsType {
   value: ProductDetailsType;
   quantity: number;
 }
+
+export interface ProductWithQuantityType {
+  _id: string;
+  product: { _id: string; name: string };
+  quantity: number;
+}
+
+export interface MealType {
+  _id: string;
+  name: string;
+  category: MealCategoriesType;
+  createdAt: Date;
+  ownerId: string;
+  nutrients: ProductNutrientsType;
+  products: ProductWithQuantityType[];
+}
+
+export type MealsResponse = MealType[];
