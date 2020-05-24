@@ -10,7 +10,7 @@ export const StyledInput = styled.input`
   background-color: ${colors.orange};
   color: ${colors.dark_gray};
   text-align: center;
-  font-size: 15px;
+  font-size: 14px;
   padding: 5px 15px;
   border: 2px solid ${colors.paleVioletRed};
 `;

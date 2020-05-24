@@ -5,8 +5,9 @@ import { MealCategoriesType, MealsResponse } from "utils/api/types";
 
 import List from "components/List";
 import Loader from "components/Loader";
-import GridItem from "components/GridItem";
+import Footer from "components/Footer";
 import Button from "components/Button";
+import Header from "components/Header";
 
 import { Main } from "./styles";
 
@@ -25,6 +26,7 @@ const CurrentMeals: FC<Props> = ({ meals, openNewMealView }) => {
 
   return (
     <>
+      <Header title={t("my_meals")} />
       <Main gridArea="main">
         {categories.map(category => (
           <List
@@ -37,9 +39,9 @@ const CurrentMeals: FC<Props> = ({ meals, openNewMealView }) => {
         ))}
         {!categories.length && <Loader />}
       </Main>
-      <GridItem justifySelf="center" gridArea="footer">
+      <Footer>
         <Button onClick={openNewMealView}>{t("create_new_meal")}</Button>
-      </GridItem>
+      </Footer>
     </>
   );
 };

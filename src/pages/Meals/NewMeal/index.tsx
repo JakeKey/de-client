@@ -1,3 +1,4 @@
+/* eslint-disable no-magic-numbers */
 import React, { useState, useEffect, FC } from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { AxiosResponse } from "axios";
@@ -24,10 +25,12 @@ import colors from "styles/colors";
 import List from "components/List";
 import TextInput from "components/TextInput";
 import Button from "components/Button";
-import GridItem from "components/GridItem";
 import FlexDiv from "components/FlexDiv";
+import Footer from "components/Footer";
+import GridItem from "components/GridItem";
+import Header from "components/Header";
 
-import { customSelectStyle, Footer } from "./styles";
+import { NewMealLayout, customSelectStyle, MealData } from "./styles";
 
 const quantitySchema = yup
   .number()
@@ -183,139 +186,154 @@ const NewMeal: FC<Props> = ({ closeNewMealView, anyMeals }) => {
   };
 
   useEffect(() => {
-    if (mealProducts.length)
-      setCurrentNutrients(getProductsNutrients(mealProducts));
+    setCurrentNutrients(
+      mealProducts.length ? getProductsNutrients(mealProducts) : undefined
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mealProducts]);
 
   return (
     <>
-      <GridItem gridRowEnd="span 2">
-        <TextInput
-          name="meal_name"
-          label={t("meal_name")}
-          type="text"
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            setMealName(e.target.value)
-          }
-          value={mealName}
-          margin="0 0 12px"
-        />
-
-        <ReactSelect
-          onChange={(value: ValueType<MealCategoryOption>) => {
-            setMealCategory(value);
-          }}
-          options={options.mealCategories}
-          value={mealCategory}
-          isSearchable={false}
-          placeholder={t("select_meal_category")}
-          styles={customSelectStyle({ margin: "0 0 10px" })}
-        />
-
-        <ReactSelect
-          onChange={(value: ValueType<CategoryOption>) => {
-            setProductCategory(value);
-            setProduct(null);
-          }}
-          options={options.categories}
-          value={productCategory}
-          isSearchable={false}
-          placeholder={t("select_prod_category")}
-          styles={customSelectStyle()}
-        />
-        <ReactSelect
-          onChange={(value: ValueType<ProductOption>) => setProduct(value)}
-          options={options.products}
-          value={product}
-          isSearchable={false}
-          placeholder={t("select_product")}
-          styles={customSelectStyle()}
-        />
-        {product && "value" in product && (
-          <>
-            <List
-              title={t("nutrients_per_100g")}
-              elements={(Object.keys(
-                product.value.nutrients
-              ) as NutrientsType[]).map(nutr => ({
-                label: `${t(nutr)}: ${product.value.nutrients[nutr]}g`,
-                id: t(nutr)
-              }))}
+      <Header title={t("create_new_meal")} />
+      <GridItem gridArea="main">
+        <NewMealLayout>
+          <MealData>
+            <TextInput
+              name="meal_name"
+              placeholder={t("type_meal_name")}
+              label={t("meal_name")}
+              type="text"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                setMealName(e.target.value)
+              }
+              value={mealName}
+              margin="0 0 5px"
             />
-            <FlexDiv alignItems="center">
-              <TextInput
-                name="quantity"
-                step={0.1}
-                label={t("quantity_g")}
-                type="number"
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  if (!e.target.value) return;
-                  setProductQuantity(parseFloat(e.target.value));
-                }}
-                value={productQuantity}
-                max={1000}
-                min={0.1}
-                size={6}
-              />
-              <Button
-                color="transparent"
-                margin="0 20px"
-                onClick={() =>
-                  quantitySchema
-                    .isValid(productQuantity)
-                    .then(
-                      (valid: boolean) =>
-                        valid && handleMealProductsAdd(product, productQuantity)
-                    )
-                }
-              >
-                {t("add_product")}
-              </Button>
-            </FlexDiv>
-          </>
-        )}
-      </GridItem>
-      <div>
-        {mealProducts.length ? (
-          <List
-            title={t("current_products")}
-            elements={mealProducts.map(prod => ({
-              label: `${prod.value.name} ${prod.quantity.toFixed(1)}g`,
-              id: prod.value._id
-            }))}
-            icon="minus"
-            iconColor={colors.red}
-            onClick={handleMealProductsRemove}
-          />
-        ) : (
-          t("add_products")
-        )}
-      </div>
-      <div>
-        {currentNutrients ? (
-          <List
-            title={t("current_nutrients")}
-            elements={(Object.keys(currentNutrients) as NutrientsType[]).map(
-              nutr => ({
-                label: `${t(nutr)}: ${currentNutrients[nutr].toFixed(2)}g`,
-                id: t(nutr)
-              })
+
+            <ReactSelect
+              onChange={(value: ValueType<MealCategoryOption>) => {
+                setMealCategory(value);
+              }}
+              options={options.mealCategories}
+              value={mealCategory}
+              isSearchable={false}
+              placeholder={t("select_meal_category")}
+              styles={customSelectStyle({ margin: "0 0 5px" })}
+            />
+
+            <ReactSelect
+              onChange={(value: ValueType<CategoryOption>) => {
+                setProductCategory(value);
+                setProduct(null);
+              }}
+              options={options.categories}
+              value={productCategory}
+              isSearchable={false}
+              placeholder={t("select_prod_category")}
+              styles={customSelectStyle({ margin: "0 0 5px" })}
+            />
+            <ReactSelect
+              onChange={(value: ValueType<ProductOption>) => setProduct(value)}
+              options={options.products}
+              value={product}
+              isSearchable={false}
+              placeholder={t("select_product")}
+              styles={customSelectStyle()}
+            />
+            {product && "value" in product && (
+              <>
+                <List
+                  title={t("nutrients_per_100g")}
+                  elements={(Object.keys(
+                    product.value.nutrients
+                  ) as NutrientsType[]).map(nutr => ({
+                    label: `${t(nutr)}: ${product.value.nutrients[nutr]}g`,
+                    id: t(nutr)
+                  }))}
+                />
+                <FlexDiv alignItems="center">
+                  <TextInput
+                    name="quantity"
+                    step={0.1}
+                    label={t("quantity_g")}
+                    type="number"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      if (!e.target.value) return;
+                      setProductQuantity(parseFloat(e.target.value));
+                    }}
+                    value={productQuantity}
+                    max={1000}
+                    min={0.1}
+                    size={6}
+                    margin="5px 0"
+                  />
+                  <Button
+                    color="transparent"
+                    margin="0 10px"
+                    onClick={() =>
+                      quantitySchema
+                        .isValid(productQuantity)
+                        .then(
+                          (valid: boolean) =>
+                            valid &&
+                            handleMealProductsAdd(product, productQuantity)
+                        )
+                    }
+                  >
+                    {t("add_product")}
+                  </Button>
+                </FlexDiv>
+              </>
             )}
-          />
-        ) : (
-          t("add_products")
-        )}
-      </div>
-      <Footer justifySelf="center" gridArea="footer">
+          </MealData>
+
+          <GridItem>
+            {currentNutrients ? (
+              <List
+                title={t("current_nutrients")}
+                elements={(Object.keys(
+                  currentNutrients
+                ) as NutrientsType[]).map(nutr => ({
+                  label: `${t(nutr)}: ${currentNutrients[nutr].toFixed(2)}g`,
+                  id: t(nutr)
+                }))}
+              />
+            ) : (
+              t("add_products")
+            )}
+          </GridItem>
+          <GridItem>
+            {mealProducts.length ? (
+              <List
+                title={t("current_products")}
+                elements={mealProducts.map(prod => ({
+                  label: `${prod.value.name} ${prod.quantity.toFixed(1)}g`,
+                  id: prod.value._id
+                }))}
+                icon="minus"
+                iconColor={colors.red}
+                onClick={handleMealProductsRemove}
+              />
+            ) : (
+              t("add_products")
+            )}
+          </GridItem>
+        </NewMealLayout>
+      </GridItem>
+      <Footer>
         {anyMeals && (
-          <Button color="transparent" onClick={closeNewMealView}>
+          <Button
+            color="transparent"
+            onClick={closeNewMealView}
+            margin="16px 20px"
+          >
             {t("go_back")}
           </Button>
         )}
         <Button
           onClick={handleMealAdd}
           disabled={!mealProducts.length || !mealName || !mealCategory}
+          margin="16px 20px"
         >
           {t("add_meal")}
         </Button>

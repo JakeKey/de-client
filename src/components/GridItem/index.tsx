@@ -17,10 +17,10 @@ type AlignmentType =
   | "unset";
 
 interface Props {
-  gridColumnStart?: string;
-  gridColumnEnd?: string;
-  gridRowStart?: string;
-  gridRowEnd?: string;
+  gridColumnStart?: string | number;
+  gridColumnEnd?: string | number;
+  gridRowStart?: string | number;
+  gridRowEnd?: string | number;
   gridColumn?: string;
   gridRow?: string;
   gridArea?: string;

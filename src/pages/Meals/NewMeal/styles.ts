@@ -1,11 +1,32 @@
 import styled, { CSSProperties } from "styled-components/macro";
 
 import colors from "styles/colors";
-import GridItem from "components/GridItem";
+import { breakpoints } from "utils/constants";
 
-export const Footer = styled(GridItem)`
-  & > button {
-    margin: 0 50px;
+import { MAIN_COL_WIDTH } from "components/Layout/styles";
+
+export const NewMealLayout = styled.main`
+  display: grid;
+
+  grid-template-columns: minmax(${MAIN_COL_WIDTH}, 1fr) repeat(
+      auto-fit,
+      minmax(160px, 1fr)
+    );
+  grid-template-rows: repeat(2, 1fr);
+  overflow: auto;
+  height: 100%;
+
+  @media only screen and (max-width: ${breakpoints.sm.width}) {
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: minmax(0, 1fr);
+  }
+`;
+
+export const MealData = styled.div`
+  grid-row-end: span 2;
+
+  @media only screen and (max-width: ${breakpoints.sm.width}) {
+    grid-row-end: auto;
   }
 `;
 
@@ -14,36 +35,62 @@ interface Arguments {
 }
 
 export const customSelectStyle = (styles?: Arguments) => ({
+  value: (provided: CSSProperties) => ({
+    ...provided
+  }),
+
+  input: (provided: CSSProperties) => ({ ...provided }),
   option: (provided: CSSProperties) => ({
     ...provided,
     cursor: "pointer",
-    color: colors.dark_gray,
-    fontSize: "13px",
+    color: colors.black,
+    fontSize: "14px",
     fontWeight: 600,
     ":hover": {
-      backgroundColor: colors.dark_blue
-    }
+      opacity: 0.6
+    },
+    height: "30px",
+    minHeight: "30px"
   }),
   container: (provided: CSSProperties) => ({
     ...provided,
-    width: "250px",
+    minWidth: "200px",
+    maxWidth: "220px",
     margin: styles && styles.margin
   }),
-  control: (provided: CSSProperties) => ({
-    ...provided,
+  control: () => ({
+    border: `1px solid ${colors.orange}`,
+    borderRadius: "4px",
     backgroundColor: colors.blue,
-    cursor: "pointer"
+    cursor: "pointer",
+    height: "30px",
+    minHeight: "30px"
   }),
   menu: (provided: CSSProperties) => ({
     ...provided,
     backgroundColor: colors.blue
   }),
-  singleValue: (provided: CSSProperties) => ({
-    ...provided,
-    color: colors.dark_gray,
-    fontSize: "13px",
+  singleValue: () => ({
+    color: colors.black,
+    fontSize: "14px",
     fontWeight: 600
   }),
-  indicatorSeparator: () => ({ display: "none" }),
-  dropdownIndicator: () => ({ color: colors.dark_gray })
+  dropdownIndicator: () => ({
+    color: colors.black,
+    margin: "0 5px"
+  }),
+  indicatorsContainer: (provided: CSSProperties) => ({
+    ...provided,
+    display: "none"
+  }),
+  selectContainer: (provided: CSSProperties) => ({
+    ...provided,
+    height: "10px"
+  }),
+  placeholder: () => ({
+    fontSize: "14px",
+    color: colors.black,
+    opacity: 0.6,
+    height: "10px"
+  })
 });

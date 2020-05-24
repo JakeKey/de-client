@@ -5,6 +5,7 @@ import styled, {
 import { NavLink } from "react-router-dom";
 
 import colors from "styles/colors";
+import { breakpoints } from "utils/constants";
 
 export type ButtonColors = "primary" | "transparent";
 
@@ -22,7 +23,11 @@ const buttonColors = (color: ButtonColors): FlattenSimpleInterpolation =>
       border: 2px solid ${colors.paleVioletRed};
       border-radius: 20px;
       padding: 4px 0;
-      width: 200px;
+      min-width: 200px;
+
+      @media only screen and (max-width: ${breakpoints.sm.width}) {
+        min-width: 150px;
+      }
     `,
     transparent: css`
       font-weight: bold;

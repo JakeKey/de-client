@@ -20,7 +20,7 @@ import {
   ErrorCircleIcon,
   SuccessCircleIcon,
   UserIcon,
-  MaterialIcon
+  MenuIcon
 } from "./Icons";
 
 export type IconName =
@@ -41,7 +41,7 @@ export type IconName =
   | "errorCircle"
   | "successCircle"
   | "user"
-  | "material";
+  | "menu";
 
 interface Props {
   type: IconName;
@@ -79,7 +79,7 @@ const Icon: React.FC<Props & Partial<IconProps>> = ({
     errorCircle: <ErrorCircleIcon {...params} {...props} />,
     successCircle: <SuccessCircleIcon {...params} {...props} />,
     user: <UserIcon {...params} {...props} />,
-    material: <MaterialIcon {...params} {...props} />
+    menu: <MenuIcon {...params} {...props} />
   }[type];
 };
 

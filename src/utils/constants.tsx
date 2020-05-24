@@ -8,3 +8,8 @@ export const mealCategories: MealCategoriesType[] = [
   "I dinner",
   "II dinner"
 ];
+
+export const breakpoints = {
+  md: { width: "840px", height: "700px" },
+  sm: { width: "600px", height: "600px" }
+};

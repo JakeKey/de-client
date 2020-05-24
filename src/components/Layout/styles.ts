@@ -1,26 +1,23 @@
 import styled from "styled-components/macro";
-import colors from "styles/colors";
 
-export const HEADER_HEIGHT = "50px";
+import { breakpoints } from "utils/constants";
+
+export const MAIN_COL_WIDTH = "245px";
+export const NAV_WIDTH = "200px";
+const HEADER_HEIGHT = "50px";
+const FOOTER_HEIGHT = "65px";
 
 export const Wrapper = styled.div`
   display: grid;
-  grid-template-rows: ${HEADER_HEIGHT} repeat(2, minmax(0, 1fr)) 65px;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-areas: "header header" "main main" "main main" "footer footer";
+  grid-template-rows: ${HEADER_HEIGHT} minmax(0, 1fr) ${FOOTER_HEIGHT};
+  grid-template-columns: ${NAV_WIDTH} minmax(0, 1fr);
+  grid-template-areas: ". header" "nav main" ". footer";
   grid-gap: 10px;
-  justify-content: center;
   width: 100%;
-  padding: 0 20px;
+  max-height: 100%;
 
-  & > div {
-    overflow: auto;
+  @media only screen and (max-width: ${breakpoints.md.width}) {
+    grid-template-columns: 50px minmax(0, 1fr);
+    grid-template-areas: "nav header" "main main" "main main" "footer footer";
   }
-`;
-
-export const Header = styled.div`
-  align-self: center;
-  justify-self: center;
-  color: ${colors.blue};
-  grid-area: header;
 `;

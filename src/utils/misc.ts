@@ -49,3 +49,8 @@ export const getProductsNutrients = (
     )
     .reduce((pVal, cVal) => pVal + cVal)
 });
+
+export const addPixels = (values: string[]): string =>
+  values
+    .map(val => parseInt(val.replace(/px/, ""), 10))
+    .reduce((pVal, cVal) => pVal + cVal) + "px";

@@ -6,9 +6,12 @@ import FlexDiv from "components/FlexDiv";
 
 export const Wrapper = styled(FlexDiv)`
   background-color: ${colors.shamrock};
-  margin: 10vh 30vw;
+  margin: auto;
+  margin-top: 10vh;
   padding: 5vh 5vw;
   border-radius: 20px;
+  min-width: 120px;
+  max-width: 400px;
 `;
 
 export const Title = styled.h1`

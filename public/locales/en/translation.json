@@ -15,6 +15,7 @@
     "register_back": "<- go back"
   },
   "navigation": {
+    "app_title": "Diet Editor",
     "nav_home": "Home",
     "nav_meals": "My Meals",
     "nav_diets": "My Diets",
@@ -59,6 +60,7 @@
     "add_meal": "Add meal",
     "category_meals": "{{category}} meals:",
     "create_new_meal": "Create new meal",
-    "go_back": "<- go back"
+    "go_back": "<- go back",
+    "type_meal_name": "Type meal name..."
   }
 }
