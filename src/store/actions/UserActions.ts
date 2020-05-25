@@ -1,35 +1,43 @@
-import axios from "axios";
-import { Action } from "redux";
-import { ThunkAction } from "redux-thunk";
+import axios, { AxiosError } from "axios";
+import { Action, CombinedState } from "redux";
+import { ThunkAction, ThunkDispatch } from "redux-thunk";
 
 import { REACT_APP_API_URL, AUTH_ROUTE, USER_ROUTE } from "config";
-import { ActionTypes } from "../types";
+import { ErrorType, notificationTypes } from "utils/constants";
+
+import { ActionTypes, NotificationsTypes, Actions } from "../types";
 import { RootState } from "../reducers";
+import { UserState } from "store/reducers/UserReducer";
 
 export const userLogin = (
   username: string,
   password: string
 ): ThunkAction<void, RootState, unknown, Action<string>> => dispatch => {
-  try {
-    axios
-      .post(REACT_APP_API_URL + AUTH_ROUTE, {
-        username,
-        password
-      })
-      .then(({ headers, data }) => {
-        saveToken(headers["x-auth-token"]);
-        dispatch({
-          type: ActionTypes.USER_LOGIN,
-          payload: {
-            token: headers["x-auth-token"],
-            id: data.id,
-            username: data.username
-          }
-        });
+  axios
+    .post(REACT_APP_API_URL + AUTH_ROUTE, {
+      username,
+      password
+    })
+    .then(({ headers, data }) => {
+      saveToken(headers["x-auth-token"], dispatch);
+      dispatch({
+        type: ActionTypes.USER_LOGIN,
+        payload: {
+          token: headers["x-auth-token"],
+          id: data.id,
+          username: data.username
+        }
       });
-  } catch (err) {
-    console.log("Login Error: ", err);
-  }
+    })
+    .catch((err: AxiosError<ErrorType>) =>
+      dispatch({
+        type: ActionTypes.SET_NOTIFICATION_CODE,
+        payload: {
+          code: err.response?.data.code,
+          type: notificationTypes.error
+        }
+      })
+    );
 };
 
 export const userRegister = (
@@ -41,21 +49,25 @@ export const userRegister = (
       username,
       password
     })
-    .then(
-      ({ headers, data }) => {
-        saveToken(headers["x-auth-token"]);
-        dispatch({
-          type: ActionTypes.USER_REGISTER,
-          payload: {
-            token: headers["x-auth-token"],
-            id: data.id,
-            username: data.username
-          }
-        });
-      },
-      err => {
-        console.log("Register Error: ", err);
-      }
+    .then(({ headers, data }) => {
+      saveToken(headers["x-auth-token"], dispatch);
+      dispatch({
+        type: ActionTypes.USER_REGISTER,
+        payload: {
+          token: headers["x-auth-token"],
+          id: data.id,
+          username: data.username
+        }
+      });
+    })
+    .catch((err: AxiosError<ErrorType>) =>
+      dispatch({
+        type: ActionTypes.SET_NOTIFICATION_CODE,
+        payload: {
+          code: err.response?.data.code,
+          type: notificationTypes.error
+        }
+      })
     );
 
 export const userLogout = (): ThunkAction<
@@ -70,17 +82,45 @@ export const userLogout = (): ThunkAction<
       dispatch({
         type: ActionTypes.USER_LOGOUT
       });
-    } catch (e) {
-      console.log("Error removing token: ", e);
+    } catch (err) {
+      dispatch({
+        type: ActionTypes.SET_NOTIFICATION_CODE,
+        payload: {
+          code: err?.code,
+          type: notificationTypes.error
+        }
+      });
     }
   };
   return removeToken();
 };
 
-const saveToken = async (token: string) => {
+const saveToken = async (
+  token: string,
+  dispatch: ThunkDispatch<
+    CombinedState<{
+      user: UserState;
+    }>,
+    unknown,
+    Action<string>
+  >
+) => {
   try {
     await localStorage.setItem("authToken", token);
-  } catch (e) {
-    console.log("Error saving token: ", e);
+  } catch (err) {
+    dispatch({
+      type: ActionTypes.SET_NOTIFICATION_CODE,
+      payload: {
+        code: err?.code,
+        type: notificationTypes.error
+      }
+    });
   }
 };
+
+export const setNotification = (
+  notification?: NotificationsTypes
+): Actions => ({
+  type: ActionTypes.SET_NOTIFICATION_CODE,
+  payload: notification
+});

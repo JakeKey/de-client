@@ -62,5 +62,17 @@
     "create_new_meal": "Create new meal",
     "go_back": "<- go back",
     "type_meal_name": "Type meal name..."
+  },
+  "Notifications": {
+    "close_notification": "Close notification",
+    "GENERAL_ERROR": "Something went wrong...",
+    "GENERAL_SUCCESS": "Changes saved",
+    "LOGIN": "Login successful",
+    "LOGOUT": "Logut successful",
+    "UNAUTHORIZED": "Unauthorized",
+    "FORBIDDEN": "Forbidden",
+    "INVALID_LOGIN_DATA": "Invalid username or password",
+    "USERNAME_TAKEN": "Username already taken",
+    "MEAL_ADDED": "Meal has been added"
   }
 }

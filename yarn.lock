@@ -1732,6 +1732,11 @@
     "@types/react-native" "*"
     csstype "^2.2.0"
 
+"@types/uuid@^8.0.0":
+  version "8.0.0"
+  resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.0.0.tgz#165aae4819ad2174a17476dbe66feebd549556c0"
+  integrity sha512-xSQfNcvOiE5f9dyd4Kzxbof1aTrLobL278pGLKOZI6esGfZ7ts9Ka16CzIN6Y8hFHE1C7jIBZokULhK1bOgjRw==
+
 "@types/yargs-parser@*":
   version "15.0.0"
   resolved "https://registry.yarnpkg.com/@types/yargs-parser/-/yargs-parser-15.0.0.tgz#cb3f9f741869e20cce330ffbeb9271590483882d"
@@ -9833,6 +9838,11 @@ react-transition-group@^4.3.0:
     dom-helpers "^5.0.1"
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
+
+react-uuid@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-uuid/-/react-uuid-1.0.2.tgz#c77cea91cf38eafb1aaa7910f92621b2ed91b969"
+  integrity sha512-5e0GM16uuQj9MdRJlZ0GdLC8LKMwpU9PIqYmF27s3fIV2z+rLyASTaiW4aKzSY4DyGanz+ImzsECkftwGWfAwA==
 
 react@^16.12.0:
   version "16.13.1"

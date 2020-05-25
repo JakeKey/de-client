@@ -3,8 +3,11 @@ import React, { useState, useEffect, FC } from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { AxiosResponse } from "axios";
 import * as yup from "yup";
+import { connect, ConnectedProps } from "react-redux";
 
 import { PRODUCTS_ROUTE, PRODUCTS_CATEGORIES_ROUTE, MEALS_ROUTE } from "config";
+import { setNotification } from "store/actions";
+import { notificationTypes } from "utils/constants";
 import api from "utils/api";
 import usePrefix from "utils/usePrefix";
 import {
@@ -37,9 +40,14 @@ const quantitySchema = yup
   .min(0.1)
   .max(1000);
 
+const connector = connect(null, { setNotification });
+
+type PropsFromRedux = ConnectedProps<typeof connector>;
+
 interface Props {
   anyMeals: boolean;
   closeNewMealView: () => void;
+  handleRefetchMeals: () => void;
 }
 
 interface CategoryOption {
@@ -63,7 +71,12 @@ interface OptionsTypes {
   mealCategories: MealCategoryOption[];
 }
 
-const NewMeal: FC<Props> = ({ closeNewMealView, anyMeals }) => {
+const NewMeal: FC<PropsFromRedux & Props> = ({
+  closeNewMealView,
+  anyMeals,
+  handleRefetchMeals,
+  setNotification
+}) => {
   const t = usePrefix("meals");
 
   const [options, setOptions] = useState<OptionsTypes>({
@@ -88,42 +101,49 @@ const NewMeal: FC<Props> = ({ closeNewMealView, anyMeals }) => {
   >();
 
   const getProducts = async (category?: string) => {
-    const result: AxiosResponse<ProductDetailsResponse> | void = await api(
-      `${PRODUCTS_ROUTE}${!category ? "" : `?category=${category}`}`,
-      {
-        method: "GET"
-      }
-    );
+    try {
+      const result: AxiosResponse<ProductDetailsResponse> | void = await api(
+        `${PRODUCTS_ROUTE}${!category ? "" : `?category=${category}`}`,
+        {
+          method: "GET"
+        }
+      );
 
-    if (!!result && !!result.data && !!result.data.length) {
-      const productOptions = result.data.map(product => ({
-        value: product,
-        label: product.name
-      }));
-      setOptions(prevState => ({
-        ...prevState,
-        products: productOptions
-      }));
+      if (!!result && !!result.data && !!result.data.length) {
+        const productOptions = result.data.map(product => ({
+          value: product,
+          label: product.name
+        }));
+        setOptions(prevState => ({
+          ...prevState,
+          products: productOptions
+        }));
+      }
+    } catch (err) {
+      setNotification({ code: err.code, type: notificationTypes.error });
     }
   };
 
   const getProductsCategories = async () => {
-    const result: AxiosResponse<ProductsCategoriesResponse> | void = await api(
-      PRODUCTS_CATEGORIES_ROUTE,
-      {
+    try {
+      const result: AxiosResponse<
+        ProductsCategoriesResponse
+      > | void = await api(PRODUCTS_CATEGORIES_ROUTE, {
         method: "GET"
-      }
-    );
+      });
 
-    if (!!result && !!result.data && !!result.data.length) {
-      const categoriesOptions = result.data.map(category => ({
-        value: category,
-        label: t(category)
-      }));
-      setOptions(prevState => ({
-        ...prevState,
-        categories: categoriesOptions
-      }));
+      if (!!result && !!result.data && !!result.data.length) {
+        const categoriesOptions = result.data.map(category => ({
+          value: category,
+          label: t(category)
+        }));
+        setOptions(prevState => ({
+          ...prevState,
+          categories: categoriesOptions
+        }));
+      }
+    } catch (err) {
+      setNotification({ code: err.code, type: notificationTypes.error });
     }
   };
 
@@ -171,18 +191,32 @@ const NewMeal: FC<Props> = ({ closeNewMealView, anyMeals }) => {
     setMealProducts(mealProducts.filter(prod => prod.value._id !== id));
 
   const handleMealAdd = async () => {
-    const result: AxiosResponse<MealsResponse> | void = await api(MEALS_ROUTE, {
-      method: "POST",
-      data: {
-        name: mealName,
-        category: mealCategory && "value" in mealCategory && mealCategory.value,
-        products: mealProducts.map(prod => ({
-          productId: prod.value._id,
-          quantity: prod.quantity
-        }))
+    try {
+      const result: AxiosResponse<MealsResponse> | void = await api(
+        MEALS_ROUTE,
+        {
+          method: "POST",
+          data: {
+            name: mealName,
+            category:
+              mealCategory && "value" in mealCategory && mealCategory.value,
+            products: mealProducts.map(prod => ({
+              productId: prod.value._id,
+              quantity: prod.quantity
+            }))
+          }
+        }
+      );
+      if (result && result.data) {
+        handleRefetchMeals();
+        setNotification({
+          code: "MEAL_ADDED",
+          type: notificationTypes.success
+        });
       }
-    });
-    if (result && result.data) console.log("result", result.data);
+    } catch (err) {
+      setNotification({ code: err.code, type: notificationTypes.error });
+    }
   };
 
   useEffect(() => {
@@ -342,4 +376,4 @@ const NewMeal: FC<Props> = ({ closeNewMealView, anyMeals }) => {
   );
 };
 
-export default NewMeal;
+export default connector(NewMeal);

@@ -1,6 +1,7 @@
 import React, { ReactNode, FC } from "react";
 import { Redirect } from "react-router-dom";
 import { connect, ConnectedProps } from "react-redux";
+
 import { RootState } from "store/reducers";
 
 import { Wrapper, Title, LoginForm } from "./styles";

@@ -1,25 +1,19 @@
-import React, { useState, ChangeEvent, FC } from "react";
+import React, { useState, ChangeEvent, FC, MouseEvent } from "react";
 import { connect, ConnectedProps } from "react-redux";
 
 import usePrefix from "utils/usePrefix";
 import { userRegister } from "store/actions";
-import { RootState } from "store/reducers";
 
 import Button from "components/Button";
 import LoginPageContainer from "components/LoginPageContainer";
 import StyledLink from "components/StyledLink";
 import TextInput from "components/TextInput";
 
-const mapStateToProps = ({ user }: RootState) => {
-  const { userdata } = user;
-  return { userdata };
-};
-
-const connector = connect(mapStateToProps, { userRegister });
+const connector = connect(null, { userRegister });
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const Register: FC<PropsFromRedux> = ({ userRegister, userdata }) => {
+const Register: FC<PropsFromRedux> = ({ userRegister }) => {
   const t = usePrefix("landingpage");
 
   const [state, setState] = useState({
@@ -43,13 +37,13 @@ const Register: FC<PropsFromRedux> = ({ userRegister, userdata }) => {
     setState({ ...state, passwordVerify: value });
   };
 
-  const handleRegister = (e: any) => {
+  const handleRegister = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     // TODO add verification
     if (state.password !== state.passwordVerify) return;
     userRegister(state.username, state.password);
   };
-  console.log("userdata", userdata);
+
   return (
     <LoginPageContainer title={t("register_title")}>
       <TextInput
