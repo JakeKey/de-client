@@ -43,8 +43,6 @@ const Diets: FC<PropsFromRedux> = ({ setNotification }) => {
     setNewDietView(false);
   };
 
-  console.log("diets", diets);
-
   return newDietView ? (
     <NewDiet
       closeNewDietView={() => setNewDietView(false)}

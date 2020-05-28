@@ -2,7 +2,6 @@
 import React, { useState, useEffect, FC } from "react";
 import ReactSelect, { ValueType } from "react-select";
 import { AxiosResponse } from "axios";
-import * as yup from "yup";
 import { connect, ConnectedProps } from "react-redux";
 
 import { MEALS_ROUTE, MEALS_CATEGORIES_ROUTE, DIETS_ROUTE } from "config";
@@ -12,12 +11,7 @@ import api from "utils/api";
 import usePrefix from "utils/usePrefix";
 import {
   MealType,
-  ProductsCategoriesResponse,
   ProductsCategoriesType,
-  ProductDetailsResponse,
-  ProductDetailsType,
-  MealProductsType,
-  MealCategoriesType,
   NutrientsType,
   MealsResponse,
   MealCategoriesAllType,
@@ -26,7 +20,6 @@ import {
   DayType,
   DietsResponse
 } from "utils/api/types";
-import { mealCategories } from "utils/constants";
 import { getMealsNutrients } from "utils/misc";
 import colors from "styles/colors";
 
@@ -40,11 +33,6 @@ import Header from "components/Header";
 import { customSelectStyle } from "components/Select";
 
 import { NewDietLayout, SubHeader, DietData, BackButton } from "./styles";
-
-const quantitySchema = yup
-  .number()
-  .min(0.1)
-  .max(1000);
 
 const connector = connect(null, { setNotification });
 
