@@ -17,6 +17,10 @@ export type MealCategoriesType =
   | "I dinner"
   | "II dinner";
 
+export type AllCategoryType = "all";
+
+export type MealCategoriesAllType = MealCategoriesType | AllCategoryType;
+
 export type ProductsCategoriesResponse = ProductsCategoriesType[];
 
 export type NutrientsType =
@@ -30,17 +34,7 @@ export type NutrientsType =
   | "sugar"
   | "energy";
 
-export interface ProductNutrientsType {
-  proteins: number;
-  carbohydrates: number;
-  fat: number;
-  saturatedFat: number;
-  omega3: number;
-  omega6: number;
-  salt: number;
-  sugar: number;
-  energy: number;
-}
+export type ProductNutrientsType = Record<NutrientsType, number>;
 
 export interface ProductDetailsType {
   _id: string;
@@ -62,6 +56,8 @@ export interface ProductWithQuantityType {
   quantity: number;
 }
 
+export type MealCategoriesResponse = MealCategoriesType[];
+
 export interface MealType {
   _id: string;
   name: string;
@@ -73,3 +69,18 @@ export interface MealType {
 }
 
 export type MealsResponse = MealType[];
+
+export interface DayType {
+  meals: string[];
+  index: number;
+}
+
+export interface DietType {
+  _id: string;
+  name: string;
+  createdAt: Date;
+  ownerId: string;
+  days: DayType[];
+}
+
+export type DietsResponse = DietType[];

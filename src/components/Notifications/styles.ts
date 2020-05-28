@@ -24,7 +24,7 @@ export const Container = styled(FlexDiv)`
   position: relative;
   margin-bottom: 16px;
   padding: 8px 16px;
-  width: 280px;
+  width: 250px;
   background-color: ${colors.gray};
 `;
 

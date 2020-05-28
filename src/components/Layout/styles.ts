@@ -3,6 +3,7 @@ import styled from "styled-components/macro";
 import { breakpoints } from "utils/constants";
 
 export const MAIN_COL_WIDTH = "245px";
+export const MAIN_ADD_COL_WIDTH = "160px";
 export const NAV_WIDTH = "200px";
 const HEADER_HEIGHT = "50px";
 const FOOTER_HEIGHT = "65px";

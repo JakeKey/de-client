@@ -8,11 +8,13 @@ import colors from "styles/colors";
 import { breakpoints } from "utils/constants";
 
 export type ButtonColors = "primary" | "transparent";
+export type SizeTypes = "md" | "lg";
 
 interface StyleProps {
   color: ButtonColors;
   margin: string;
   disabled: boolean;
+  size: SizeTypes;
 }
 
 const buttonColors = (color: ButtonColors): FlattenSimpleInterpolation =>
@@ -22,17 +24,13 @@ const buttonColors = (color: ButtonColors): FlattenSimpleInterpolation =>
       color: ${colors.amber};
       border: 2px solid ${colors.paleVioletRed};
       border-radius: 20px;
-      padding: 4px 0;
-      min-width: 200px;
-
-      @media only screen and (max-width: ${breakpoints.sm.width}) {
-        min-width: 150px;
-      }
+      padding: 4px;
     `,
     transparent: css`
       font-weight: bold;
       background-color: transparent;
       color: ${colors.blue};
+      min-width: 0;
     `
   }[color]);
 
@@ -47,6 +45,21 @@ const buttonStyles = css<StyleProps>`
     css`
       margin: ${margin};
     `}
+  ${({ size }) =>
+    size === "lg"
+      ? css`
+          min-width: 200px;
+          @media only screen and (max-width: ${breakpoints.sm.width}) {
+            min-width: 150px;
+          }
+        `
+      : css`
+          font-size: 14px;
+          min-width: 150px;
+          @media only screen and (max-width: ${breakpoints.sm.width}) {
+            min-width: 100px;
+          }
+        `};
 
   &:hover {
     opacity: 0.8;

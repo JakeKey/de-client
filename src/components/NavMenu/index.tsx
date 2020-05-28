@@ -28,11 +28,15 @@ const NavMenu: FC<PropsFromRedux> = ({ userLogout }) => {
           <StyledIcon type="close" onClick={() => setIsOpen(false)} />
         </div>
         <AppTitle>{t("app_title")}</AppTitle>
-        <NavItemLink exact to="/app">
+        <NavItemLink onClick={() => setIsOpen(false)} exact to="/app">
           {t("nav_home")}
         </NavItemLink>
-        <NavItemLink to="/app/meals">{t("nav_meals")}</NavItemLink>
-        <NavItemLink to="/app/diets">{t("nav_diets")}</NavItemLink>
+        <NavItemLink onClick={() => setIsOpen(false)} to="/app/meals">
+          {t("nav_meals")}
+        </NavItemLink>
+        <NavItemLink onClick={() => setIsOpen(false)} to="/app/diets">
+          {t("nav_diets")}
+        </NavItemLink>
         <NavItem onClick={userLogout}>{t("log_out")}</NavItem>
       </Wrapper>
       <BurgerMenu>

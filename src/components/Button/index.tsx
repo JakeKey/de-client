@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 
-import { ButtonColors, StyledButton, NavItem } from "./styles";
+import { ButtonColors, SizeTypes, StyledButton, NavItem } from "./styles";
 
 interface Props {
   navLink?: string;
@@ -9,6 +9,7 @@ interface Props {
   color?: ButtonColors;
   margin?: string;
   disabled?: boolean;
+  size?: SizeTypes;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
@@ -20,6 +21,7 @@ const Button: FC<Props> = ({
   color = "primary",
   margin = "16px 0",
   disabled = false,
+  size = "lg",
   ...props
 }) =>
   navLink ? (
@@ -29,6 +31,7 @@ const Button: FC<Props> = ({
       color={color}
       margin={margin}
       disabled={disabled}
+      size={size}
       {...props}
     />
   ) : (
@@ -38,6 +41,7 @@ const Button: FC<Props> = ({
       color={color}
       margin={margin}
       disabled={disabled}
+      size={size}
       {...props}
     />
   );

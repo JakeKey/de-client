@@ -1,6 +1,31 @@
 {
   "general": {
-    "loading": "Loading..."
+    "loading": "Loading...",
+    "all": "All",
+    "meat": "meat",
+    "dairy": "dairy",
+    "I breakfast": "I breakfast",
+    "II breakfast": "II breakfast",
+    "lunch": "Lunch",
+    "snack": "Snack",
+    "I dinner": "I dinner",
+    "II dinner": "II dinner",
+    "preserved food": "preserved food",
+    "fish & seafood": "fish & seafood",
+    "fats & oils": "fats & oils",
+    "dried fruit": "dried fruit",
+    "cereal products": "cereal products",
+    "fruits": "fruits",
+    "vegetables": "vegetables",
+    "proteins": "proteins",
+    "carbohydrates": "carbohydrates",
+    "fat": "fat",
+    "saturatedFat": "saturated fat",
+    "omega3": "omega 3",
+    "omega6": "omega 6",
+    "salt": "salt",
+    "sugar": "sugar",
+    "energy": "energy"
   },
   "landingpage": {
     "login_title": "Login to Diet Editor",
@@ -20,6 +45,13 @@
     "nav_meals": "My Meals",
     "nav_diets": "My Diets",
     "log_out": "Log Out"
+  },
+  "home": {
+    "welcome_to_diet_edtior": "Welcome to Diet Editor",
+    "description": "App is in the Alpha stage, so there are still lots of a things that can and will be improved, plus any changes you make can be vanished during backend rework, but go ahead and try it out by",
+    "and_then": "and then",
+    "adding_new_meals": "adding new meals",
+    "creating_your_diet": "creating your diet."
   },
   "meals": {
     "my_meals": "My meals",
@@ -43,15 +75,6 @@
     "fruits": "fruits",
     "vegetables": "vegetables",
     "nutrients_per_100g": "Nutrients per 100g:",
-    "proteins": "proteins",
-    "carbohydrates": "carbohydrates",
-    "fat": "fat",
-    "saturatedFat": "saturated fat",
-    "omega3": "omega 3",
-    "omega6": "omega 6",
-    "salt": "salt",
-    "sugar": "sugar",
-    "energy": "energy",
     "quantity_g": "Quantity [g]:",
     "add_product": "Add product +",
     "current_products": "Current products:",
@@ -63,6 +86,24 @@
     "go_back": "<- go back",
     "type_meal_name": "Type meal name..."
   },
+  "diets": {
+    "my_diets": "My diets",
+    "diets": "Diets:",
+    "create_new_diet": "Create new diet",
+    "finish_diet": "Finish diet",
+    "add_this_day": "Add this day",
+    "go_back": "<- go back",
+    "diet_name": "Diet name",
+    "day_nth": "Day {{index}}",
+    "type_diet_name": "Type diet name...",
+    "select_meal_category": "Select meal category...",
+    "select_meal": "Select meal...",
+    "meal_nutrients": "Meal nutrients:",
+    "add_meal": "Add meal +",
+    "add_meals": "Add meals",
+    "current_meals": "Current meals:",
+    "current_day_nutrients": "Current day nutrients:"
+  },
   "Notifications": {
     "close_notification": "Close notification",
     "GENERAL_ERROR": "Something went wrong...",
@@ -73,6 +114,9 @@
     "FORBIDDEN": "Forbidden",
     "INVALID_LOGIN_DATA": "Invalid username or password",
     "USERNAME_TAKEN": "Username already taken",
-    "MEAL_ADDED": "Meal has been added"
+    "MEAL_ADDED": "Meal has been added",
+    "DIETS_NOT_FOUND": "Diets not found",
+    "MEAL_ALREADY_ADDED": "Meal already added",
+    "DIET_ADDED": "Diet has been added"
   }
 }

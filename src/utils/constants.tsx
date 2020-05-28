@@ -1,4 +1,8 @@
-import { MealCategoriesType } from "utils/api/types";
+import {
+  MealCategoriesType,
+  AllCategoryType,
+  NutrientsType
+} from "utils/api/types";
 
 export const mealCategories: MealCategoriesType[] = [
   "I breakfast",
@@ -28,3 +32,7 @@ export interface ErrorType {
   code: string;
   message: string;
 }
+
+export const ALL_MEALS_CATEGORY: AllCategoryType = "all";
+
+export const ENERGY: NutrientsType = "energy";

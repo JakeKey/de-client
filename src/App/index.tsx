@@ -41,7 +41,7 @@ const App: FC<PropsFromRedux> = ({ notifications }) => (
           <ProtectedRoute path="/app" component={Dashboard} />
           <Redirect to="/" />
         </Switch>
-        {!!notifications.length && (
+        {!!notifications?.length && (
           <Notifications notifications={notifications} />
         )}
         <GlobalStyle />

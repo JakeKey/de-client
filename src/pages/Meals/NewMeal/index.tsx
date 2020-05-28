@@ -21,7 +21,7 @@ import {
   NutrientsType,
   MealsResponse
 } from "utils/api/types";
-import { mealCategories } from "utils/constants";
+import { mealCategories, ENERGY } from "utils/constants";
 import { getProductsNutrients } from "utils/misc";
 import colors from "styles/colors";
 
@@ -32,8 +32,9 @@ import FlexDiv from "components/FlexDiv";
 import Footer from "components/Footer";
 import GridItem from "components/GridItem";
 import Header from "components/Header";
+import { customSelectStyle } from "components/Select";
 
-import { NewMealLayout, customSelectStyle, MealData } from "./styles";
+import { NewMealLayout, MealData } from "./styles";
 
 const quantitySchema = yup
   .number()
@@ -78,6 +79,7 @@ const NewMeal: FC<PropsFromRedux & Props> = ({
   setNotification
 }) => {
   const t = usePrefix("meals");
+  const tg = usePrefix("general");
 
   const [options, setOptions] = useState<OptionsTypes>({
     categories: [],
@@ -100,30 +102,6 @@ const NewMeal: FC<PropsFromRedux & Props> = ({
     ProductNutrientsType
   >();
 
-  const getProducts = async (category?: string) => {
-    try {
-      const result: AxiosResponse<ProductDetailsResponse> | void = await api(
-        `${PRODUCTS_ROUTE}${!category ? "" : `?category=${category}`}`,
-        {
-          method: "GET"
-        }
-      );
-
-      if (!!result && !!result.data && !!result.data.length) {
-        const productOptions = result.data.map(product => ({
-          value: product,
-          label: product.name
-        }));
-        setOptions(prevState => ({
-          ...prevState,
-          products: productOptions
-        }));
-      }
-    } catch (err) {
-      setNotification({ code: err.code, type: notificationTypes.error });
-    }
-  };
-
   const getProductsCategories = async () => {
     try {
       const result: AxiosResponse<
@@ -140,6 +118,30 @@ const NewMeal: FC<PropsFromRedux & Props> = ({
         setOptions(prevState => ({
           ...prevState,
           categories: categoriesOptions
+        }));
+      }
+    } catch (err) {
+      setNotification({ code: err.code, type: notificationTypes.error });
+    }
+  };
+
+  const getProducts = async (category?: ProductsCategoriesType) => {
+    try {
+      const result: AxiosResponse<ProductDetailsResponse> | void = await api(
+        `${PRODUCTS_ROUTE}${!category ? "" : `?category=${category}`}`,
+        {
+          method: "GET"
+        }
+      );
+
+      if (!!result && !!result.data && !!result.data.length) {
+        const productOptions = result.data.map(product => ({
+          value: product,
+          label: product.name
+        }));
+        setOptions(prevState => ({
+          ...prevState,
+          products: productOptions
         }));
       }
     } catch (err) {
@@ -223,7 +225,6 @@ const NewMeal: FC<PropsFromRedux & Props> = ({
     setCurrentNutrients(
       mealProducts.length ? getProductsNutrients(mealProducts) : undefined
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mealProducts]);
 
   return (
@@ -280,10 +281,21 @@ const NewMeal: FC<PropsFromRedux & Props> = ({
                   title={t("nutrients_per_100g")}
                   elements={(Object.keys(
                     product.value.nutrients
-                  ) as NutrientsType[]).map(nutr => ({
-                    label: `${t(nutr)}: ${product.value.nutrients[nutr]}g`,
-                    id: t(nutr)
-                  }))}
+                  ) as NutrientsType[]).map(nutr =>
+                    nutr !== ENERGY
+                      ? {
+                          label: `${tg(nutr)}: ${
+                            product.value.nutrients[nutr]
+                          }g`,
+                          id: tg(nutr)
+                        }
+                      : {
+                          label: `${tg(nutr)}: ${
+                            product.value.nutrients[nutr]
+                          }kcal`,
+                          id: tg(nutr)
+                        }
+                  )}
                 />
                 <FlexDiv alignItems="center">
                   <TextInput
@@ -327,10 +339,21 @@ const NewMeal: FC<PropsFromRedux & Props> = ({
                 title={t("current_nutrients")}
                 elements={(Object.keys(
                   currentNutrients
-                ) as NutrientsType[]).map(nutr => ({
-                  label: `${t(nutr)}: ${currentNutrients[nutr].toFixed(2)}g`,
-                  id: t(nutr)
-                }))}
+                ) as NutrientsType[]).map(nutr =>
+                  nutr !== ENERGY
+                    ? {
+                        label: `${tg(nutr)}: ${currentNutrients[nutr].toFixed(
+                          2
+                        )}g`,
+                        id: tg(nutr)
+                      }
+                    : {
+                        label: `${tg(nutr)}: ${currentNutrients[nutr].toFixed(
+                          2
+                        )}kcal`,
+                        id: tg(nutr)
+                      }
+                )}
               />
             ) : (
               t("add_products")
@@ -359,7 +382,8 @@ const NewMeal: FC<PropsFromRedux & Props> = ({
           <Button
             color="transparent"
             onClick={closeNewMealView}
-            margin="16px 20px"
+            margin="16px 10px"
+            size="md"
           >
             {t("go_back")}
           </Button>
@@ -367,7 +391,8 @@ const NewMeal: FC<PropsFromRedux & Props> = ({
         <Button
           onClick={handleMealAdd}
           disabled={!mealProducts.length || !mealName || !mealCategory}
-          margin="16px 20px"
+          margin="16px 10px"
+          size="md"
         >
           {t("add_meal")}
         </Button>
