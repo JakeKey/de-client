@@ -117,6 +117,7 @@
     "MEAL_ADDED": "Meal has been added",
     "DIETS_NOT_FOUND": "Diets not found",
     "MEAL_ALREADY_ADDED": "Meal already added",
-    "DIET_ADDED": "Diet has been added"
+    "DIET_ADDED": "Diet has been added",
+    "INVALID_CAPTCHA": "Invalid captcha"
   }
 }

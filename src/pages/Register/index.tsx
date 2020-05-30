@@ -1,8 +1,10 @@
-import React, { useState, ChangeEvent, FC, MouseEvent } from "react";
+import React, { useState, ChangeEvent, FC, MouseEvent, useRef } from "react";
 import { connect, ConnectedProps } from "react-redux";
+import ReCAPTCHA from "react-google-recaptcha";
 
 import usePrefix from "utils/usePrefix";
 import { userRegister } from "store/actions";
+import { REACT_APP_RECAPTCHA_PUBLIC } from "config";
 
 import Button from "components/Button";
 import LoginPageContainer from "components/LoginPageContainer";
@@ -15,6 +17,8 @@ type PropsFromRedux = ConnectedProps<typeof connector>;
 
 const Register: FC<PropsFromRedux> = ({ userRegister }) => {
   const t = usePrefix("landingpage");
+
+  const reCaptchaRef = useRef<ReCAPTCHA>(null);
 
   const [state, setState] = useState({
     username: "",
@@ -39,9 +43,17 @@ const Register: FC<PropsFromRedux> = ({ userRegister }) => {
 
   const handleRegister = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // TODO add verification
-    if (state.password !== state.passwordVerify) return;
-    userRegister(state.username, state.password);
+    reCaptchaRef.current?.execute();
+  };
+
+  const onReCaptchaChange = (token: string | null) => {
+    if (
+      !state.username ||
+      !state.password ||
+      state.password !== state.passwordVerify
+    )
+      return;
+    userRegister(state.username, state.password, token);
   };
 
   return (
@@ -71,6 +83,12 @@ const Register: FC<PropsFromRedux> = ({ userRegister }) => {
         {t("register")}
       </Button>
       <StyledLink to="/">{t("register_back")}</StyledLink>
+      <ReCAPTCHA
+        sitekey={REACT_APP_RECAPTCHA_PUBLIC ? REACT_APP_RECAPTCHA_PUBLIC : ""}
+        onChange={onReCaptchaChange}
+        size="invisible"
+        ref={reCaptchaRef}
+      />
     </LoginPageContainer>
   );
 };

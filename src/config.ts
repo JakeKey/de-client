@@ -1,4 +1,5 @@
 const REACT_APP_API_URL = process.env.REACT_APP_API_URL;
+const REACT_APP_RECAPTCHA_PUBLIC = process.env.REACT_APP_RECAPTCHA_PUBLIC;
 
 const AUTH_ROUTE = "/auth";
 const USER_ROUTE = "/users";
@@ -10,6 +11,7 @@ const DIETS_ROUTE = "/diets";
 
 export {
   REACT_APP_API_URL,
+  REACT_APP_RECAPTCHA_PUBLIC,
   AUTH_ROUTE,
   USER_ROUTE,
   MEALS_ROUTE,

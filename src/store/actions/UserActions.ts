@@ -42,12 +42,14 @@ export const userLogin = (
 
 export const userRegister = (
   username: string,
-  password: string
+  password: string,
+  reCaptchaToken: string | null
 ): ThunkAction<void, RootState, unknown, Action<string>> => dispatch =>
   axios
     .post(REACT_APP_API_URL + USER_ROUTE, {
       username,
-      password
+      password,
+      reCaptchaToken
     })
     .then(({ headers, data }) => {
       saveToken(headers["x-auth-token"], dispatch);
