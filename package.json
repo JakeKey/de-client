@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "@types/chart.js": "^2.9.19",
+    "@types/enzyme": "^3.10.5",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/i18next": "^13.0.0",
     "@types/jest": "^25.1.4",
     "@types/node": "^13.11.0",
@@ -20,6 +22,8 @@
     "axios": "^0.19.0",
     "chart.js": "^2.9.3",
     "d3": "^5.14.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
     "i18next": "^19.3.4",
     "i18next-browser-languagedetector": "^4.0.2",
     "i18next-xhr-backend": "^3.2.2",
@@ -79,12 +83,8 @@
     ]
   },
   "devDependencies": {
-    "@types/enzyme": "^3.10.5",
-    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
-    "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.2",
     "eslint-config-prettier": "^6.9.0",
     "eslint-config-react": "^1.1.7",
     "eslint-config-react-app": "^5.0.1",
