@@ -13,7 +13,7 @@ export interface UserState {
   notifications: NotificationsListTypes[];
 }
 
-const INITIAL_STATE: UserState = {
+export const INITIAL_STATE: UserState = {
   userdata: null,
   notifications: []
 };

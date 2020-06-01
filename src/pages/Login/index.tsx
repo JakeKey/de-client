@@ -14,7 +14,7 @@ const connector = connect(null, { userLogin });
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const Login: FC<PropsFromRedux> = ({ userLogin }) => {
+export const Login: FC<PropsFromRedux> = ({ userLogin }) => {
   const t = usePrefix("landingpage");
 
   const [state, setState] = useState({ username: "", password: "" });

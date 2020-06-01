@@ -30,7 +30,7 @@ const connector = connect(mapStateToProps);
 
 type PropsFromRedux = ConnectedProps<typeof connector>;
 
-const App: FC<PropsFromRedux> = ({ notifications }) => (
+export const App: FC<PropsFromRedux> = ({ notifications }) => (
   <PersistGate loading={null} persistor={persistor}>
     <Normalize />
     <Router>
