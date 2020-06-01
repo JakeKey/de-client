@@ -2,7 +2,7 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    jest: true,
+    jest: true
   },
   extends: [
     "eslint:recommended",
@@ -13,20 +13,20 @@ module.exports = {
     "plugin:prettier/recommended",
     "prettier",
     "prettier/react",
-    "prettier/@typescript-eslint",
+    "prettier/@typescript-eslint"
   ],
   globals: {
     Atomics: "readonly",
-    SharedArrayBuffer: "readonly",
+    SharedArrayBuffer: "readonly"
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaFeatures: {
-      jsx: true,
+      jsx: true
     },
     project: "./tsconfig.json",
     ecmaVersion: 2018,
-    sourceType: "module",
+    sourceType: "module"
   },
   plugins: ["@typescript-eslint", "react-hooks", "prettier"],
   rules: {
@@ -36,8 +36,8 @@ module.exports = {
         semi: true,
         singleQuote: true,
         trailingComma: "es5",
-        printWidth: 100,
-      },
+        printWidth: 100
+      }
     ],
 
     semi: 0,
@@ -48,23 +48,14 @@ module.exports = {
     "no-mixed-operators": [
       1,
       {
-        allowSamePrecedence: true,
-      },
+        allowSamePrecedence: true
+      }
     ],
     "eol-last": [2, "always"],
     "no-confusing-arrow": 0,
     "arrow-parens": [2, "as-needed"],
     "arrow-spacing": ["error", { before: true, after: true }],
-    "no-extra-parens": [
-      "warn",
-      "all",
-      {
-        conditionalAssign: false,
-        nestedBinaryExpressions: false,
-        ignoreJSX: "all",
-        enforceForArrowConditionals: false,
-      },
-    ],
+    "no-extra-parens": 0,
     "no-param-reassign": 0,
     "prefer-template": 0,
     "prefer-promise-reject-errors": 0,
@@ -99,8 +90,8 @@ module.exports = {
         arrow: "ignore",
         condition: "ignore",
         logical: "ignore",
-        prop: "ignore",
-      },
+        prop: "ignore"
+      }
     ],
     "react/jsx-filename-extension": 0,
     "react/jsx-indent": 0,
@@ -135,8 +126,8 @@ module.exports = {
     "@typescript-eslint/array-type": [
       "error",
       {
-        arraySimple: true,
-      },
+        arraySimple: true
+      }
     ],
     "@typescript-eslint/ban-types": "error",
     "@typescript-eslint/class-name-casing": "error",
@@ -144,9 +135,9 @@ module.exports = {
       "error",
       {
         overrides: {
-          constructors: "off",
-        },
-      },
+          constructors: "off"
+        }
+      }
     ],
     "@typescript-eslint/interface-name-prefix": "error",
     "@typescript-eslint/member-ordering": "error",
@@ -199,6 +190,6 @@ module.exports = {
     radix: "error",
     "space-before-function-paren": "off",
     "use-isnan": "error",
-    "valid-typeof": "off",
-  },
+    "valid-typeof": "off"
+  }
 };
