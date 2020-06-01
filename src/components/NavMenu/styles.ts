@@ -9,7 +9,7 @@ import Icon from "components/Icons";
 export const Wrapper = styled.nav<{ isOpen: boolean }>`
   grid-area: nav;
   overflow: auto;
-  border: 4px solid ${colors.amber};
+  border: 4px solid ${colors.gray};
   background-color: ${colors.dark_green};
   z-index: 2;
 
