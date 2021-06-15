@@ -1,3 +1,8 @@
+# de-client
+
+Currently suspended project of a web app for creating diet plans, rework (especially backend) needed.
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
